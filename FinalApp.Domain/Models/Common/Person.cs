@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace FinalApp.Domain.Models.Common
+﻿namespace FinalApp.Domain.Models.Common
 {
     public abstract class Person : BaseEntity
     {

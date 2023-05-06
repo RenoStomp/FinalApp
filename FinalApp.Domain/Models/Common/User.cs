@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinalApp.Domain.Models.Common
+﻿namespace FinalApp.Domain.Models.Common
 {
-    internal class User
+    public abstract class User : AccountHolder
     {
     }
 }
