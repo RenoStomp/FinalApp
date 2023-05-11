@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalApp.Domain.Models.Entities.Users
+namespace FinalApp.Domain.Models.Common
 {
-    internal class Worker
+    internal class BaseContactInfo
     {
     }
 }
