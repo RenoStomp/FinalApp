@@ -2,5 +2,8 @@
 {
     public enum Types
     {
+        GarbageProcessing,
+        Reviewing,
+        RequestExecution,
     }
 }
