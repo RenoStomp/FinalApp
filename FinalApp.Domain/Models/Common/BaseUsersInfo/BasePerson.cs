@@ -1,4 +1,4 @@
-﻿namespace FinalApp.Domain.Models.Common
+﻿namespace FinalApp.Domain.Models.Common.BaseUsersInfo
 {
     public abstract class BasePerson : BaseEntity
     {

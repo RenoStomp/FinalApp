@@ -1,6 +1,6 @@
 ﻿using FinalApp.Domain.Models.Enums;
 
-namespace FinalApp.Domain.Models.Common
+namespace FinalApp.Domain.Models.Common.BaseRequests
 {
     public abstract class BaseRequest : BaseEntity
     {
