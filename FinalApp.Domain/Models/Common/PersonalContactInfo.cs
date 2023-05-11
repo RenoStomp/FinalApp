@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinalApp.Domain.Models.Common
+﻿namespace FinalApp.Domain.Models.Common
 {
-    internal class BaseContactInfo
+    public abstract class PersonalContactInfo : BasePerson
     {
+        public string Email { get; set; }
+        public string Phone { get; set; }
     }
 }
