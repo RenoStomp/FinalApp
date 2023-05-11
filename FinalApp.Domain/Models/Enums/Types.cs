@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalApp.Domain.Models.Entities
+namespace FinalApp.Domain.Models.Enums
 {
-    internal class Admin
+    internal class Types
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalApp.Domain.Models.Entities
+namespace FinalApp.Domain.Models.Entities.Users
 {
-    internal class SupportOperator
+    internal class Worker
     {
     }
 }

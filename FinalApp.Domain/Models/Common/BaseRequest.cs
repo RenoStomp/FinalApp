@@ -2,10 +2,9 @@
 
 namespace FinalApp.Domain.Models.Common
 {
-    public abstract class BaseUser : AccountHolder
+    public abstract class BaseOrder : BaseEntity
     {
-        public abstract Roles Role { get; set; }
+        public Status OrderStatus { get; set; }
         public DateTime CreatedTime { get; set; } = DateTime.UtcNow;
-
     }
 }
