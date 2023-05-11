@@ -5,6 +5,6 @@ namespace FinalApp.Domain.Models.Entities.Persons.Users
 {
     public class SupportOperator : BaseUser
     {
-        public override Roles UserType { get; set; }
+        public override Roles UserType { get; set; } = Roles.TechnicalSupportOperator;
     }
 }

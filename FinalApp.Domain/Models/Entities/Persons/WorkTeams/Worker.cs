@@ -1,6 +1,8 @@
-﻿namespace FinalApp.Domain.Models.Entities.Persons.WorkTeams
+﻿using FinalApp.Domain.Models.Common;
+
+namespace FinalApp.Domain.Models.Entities.Persons.WorkTeams
 {
-    public class Worker
+    public class Worker : PersonalContactInfo
     {
     }
 }
