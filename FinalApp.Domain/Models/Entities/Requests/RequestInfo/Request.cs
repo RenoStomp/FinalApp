@@ -21,6 +21,8 @@ namespace FinalApp.Domain.Models.Entities.Requests.RequestInfo
         public int? PlantId { get; set;}
         public Location Location { get; set; }
         public int? LocationId { get; set; }
+        public SupportOperator SupportOperator { get; set; }
+        public int? OperatorId { get; set; }
 
        
 
