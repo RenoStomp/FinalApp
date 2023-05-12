@@ -25,7 +25,8 @@ namespace FinalApp.Domain.Models.Entities.Requests.RequestInfo
         public int? OperatorId { get; set; }
         public Review Review { get; set; }
         public int? ReviewId { get; set; }
-
+        public TechnicalTeam TechnicalTeam { get; set; }
+        public int? TeamId { get; set; }
        
 
     }
