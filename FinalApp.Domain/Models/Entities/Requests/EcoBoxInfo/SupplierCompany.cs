@@ -2,8 +2,8 @@
 
 namespace FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo
 {
-    public class SupplierCompany : BaseSupplier
+    public class SupplierCompany : CompanyContactInfo
     {
-
+        public int MaterialPrice { get; set; }
     }
 }

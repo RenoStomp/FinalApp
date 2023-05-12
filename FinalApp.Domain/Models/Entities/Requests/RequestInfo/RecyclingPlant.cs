@@ -2,7 +2,10 @@
 
 namespace FinalApp.Domain.Models.Entities.Requests.RequestInfo
 {
-    public class RecyclingPlant : BaseRecyclingPlant
+    public class RecyclingPlant : CompanyContactInfo
     {
+        public int Income { get; set; }
+
+        public List<Request>? Requests { get; set; }
     }
 }
