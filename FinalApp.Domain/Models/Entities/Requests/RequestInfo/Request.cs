@@ -23,6 +23,8 @@ namespace FinalApp.Domain.Models.Entities.Requests.RequestInfo
         public int? LocationId { get; set; }
         public SupportOperator SupportOperator { get; set; }
         public int? OperatorId { get; set; }
+        public Review Review { get; set; }
+        public int? ReviewId { get; set; }
 
        
 
