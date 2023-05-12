@@ -1,4 +1,6 @@
-﻿namespace FinalApp.Domain.Models.Common.BaseUsersInfo
+﻿using FinalApp.Domain.Models.Common.BaseEntities;
+
+namespace FinalApp.Domain.Models.Common.BaseUsersInfo
 {
     public abstract class BasePerson : BaseEntity
     {

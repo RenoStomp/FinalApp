@@ -1,4 +1,5 @@
-﻿using FinalApp.Domain.Models.Enums;
+﻿using FinalApp.Domain.Models.Common.BaseEntities;
+using FinalApp.Domain.Models.Enums;
 
 namespace FinalApp.Domain.Models.Common.BaseRequests
 {

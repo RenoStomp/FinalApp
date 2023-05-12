@@ -1,6 +1,8 @@
-﻿namespace FinalApp.Domain.Models.Entities.Requests.RequestInfo
+﻿using FinalApp.Domain.Models.Common.BaseRequests;
+
+namespace FinalApp.Domain.Models.Entities.Requests.RequestInfo
 {
-    public class RecyclingPlant
+    public class RecyclingPlant : BaseRecyclingPlant
     {
     }
 }
