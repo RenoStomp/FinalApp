@@ -10,5 +10,7 @@ namespace FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo
         public Location Location { get; set; }
         public int? LocationId { get; set; }
 
+        public EcoBoxTemplate Template { get; set; }
+        public int? TemplatesId { get; set; }
     }
 }

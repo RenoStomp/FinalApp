@@ -8,5 +8,7 @@ namespace FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo
         public Materials MaterialType { get; set; }
         public TrashTypes TrashType { get; set; }
         public string Capacity { get; set; }
+
+        public List <EcoBox>? EcoBox { get; set; }
     }
 }
