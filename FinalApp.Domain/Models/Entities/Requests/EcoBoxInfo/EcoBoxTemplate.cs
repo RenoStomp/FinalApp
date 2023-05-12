@@ -10,5 +10,8 @@ namespace FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo
         public string Capacity { get; set; }
 
         public List <EcoBox>? EcoBox { get; set; }
+
+        public SupplierCompany Supplier { get; set; }
+        public int? SupplierId { get; set; } 
     }
 }
