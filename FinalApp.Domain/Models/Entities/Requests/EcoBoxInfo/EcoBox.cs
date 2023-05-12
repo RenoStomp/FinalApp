@@ -1,5 +1,5 @@
 ﻿using FinalApp.Domain.Models.Common.BaseRequests;
-using FinalApp.Domain.Models.Entities.Requests.RequestInfo;
+using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 
 namespace FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo
 {
