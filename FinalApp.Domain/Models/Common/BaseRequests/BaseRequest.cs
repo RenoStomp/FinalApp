@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinalApp.Domain.Models.Common.BaseRequests
+﻿namespace FinalApp.Domain.Models.Common.BaseRequests
 {
-    internal class BaseReview
+    public abstract class BaseRequest : BaseEntity
     {
+        public DateTime RequestCreatedTime { get; set; } = DateTime.UtcNow;
     }
 }

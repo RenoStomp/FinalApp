@@ -2,9 +2,8 @@
 
 namespace FinalApp.Domain.Models.Common.BaseRequests
 {
-    public abstract class BaseRequest : BaseEntity
+    public abstract class RequestInfo : BaseRequest
     {
-        public DateTime CreatedTime { get; set; } = DateTime.UtcNow;
         public abstract Status RequestStatus { get; set; }
         public abstract Types RequestType { get; set; }
     }

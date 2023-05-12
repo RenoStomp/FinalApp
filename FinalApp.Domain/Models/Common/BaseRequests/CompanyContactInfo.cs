@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinalApp.Domain.Models.Common.BaseRequests
+﻿namespace FinalApp.Domain.Models.Common.BaseRequests
 {
-    internal class CompanyContactInfo
+    public abstract class CompanyContactInfo : BaseLocation
     {
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
