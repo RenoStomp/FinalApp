@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinalApp.Domain.Models.Enums
+﻿namespace FinalApp.Domain.Models.Enums
 {
-    internal class Materials
+    public enum Materials
     {
+        Plastic,
+        Cardboard,
+        Glass,
+        Metal,
+        Paper,
+        Other,
     }
 }

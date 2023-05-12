@@ -1,6 +1,4 @@
-﻿using FinalApp.Domain.Models.Common.BaseEntities;
-using FinalApp.Domain.Models.Enums;
-
+﻿
 namespace FinalApp.Domain.Models.Common.BaseRequests
 {
     public abstract class BaseLocation : BaseEntity

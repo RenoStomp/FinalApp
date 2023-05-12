@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FinalApp.Domain.Models.Common.BaseEntities;
 
 namespace FinalApp.Domain.Models.Common.BaseRequests
 {
-    internal class BaseEcoBox
+    public abstract class BaseEcoBox : BaseEntity
     {
+        public int ProductPrice { get; set; }
     }
 }

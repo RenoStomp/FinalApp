@@ -19,6 +19,8 @@ namespace FinalApp.Domain.Models.Entities.Requests.RequestInfo
         public int? ClientId { get; set; }
         public RecyclingPlant RecyclingPlant { get; set; }
         public int? PlantId { get; set;}
+        public Location Location { get; set; }
+        public int? LocationId { get; set; }
 
        
 
