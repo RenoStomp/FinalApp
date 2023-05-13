@@ -11,7 +11,7 @@ namespace FinalApp.Domain.Models.Entities.Persons.Users
 
         public Request? Request { get; set; }
 
-        public List<Worker> Workers { get; set; }
+        public ICollection<TechnicalTeamWorker> Workers { get; set; }
         public int? WorkerId { get; set; }
 
     }

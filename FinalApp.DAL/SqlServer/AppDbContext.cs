@@ -42,8 +42,6 @@ namespace FinalApp.DAL.SqlServer
                 .WithOne(request => request.RecyclingPlant)
                 .HasForeignKey(request => request.PlantId);
 
-
-
             modelBuilder.Entity<Review>()
                  .HasOne(review => review.Request)
                  .WithOne(request => request.Review)
@@ -54,6 +52,19 @@ namespace FinalApp.DAL.SqlServer
                 .WithOne(request =>  request.TechnicalTeam)
                 .HasForeignKey<Request>(request => request.TeamId);
 
+
+            modelBuilder.Entity<TechnicalTeamWorker>()
+                 .HasKey(ttw => new { ttw.TechnicalTeamId, ttw.WorkerId });
+
+            modelBuilder.Entity<TechnicalTeamWorker>()
+                .HasOne(ttw => ttw.TechnicalTeam)
+                .WithMany(tt => tt.Workers)
+                .HasForeignKey(ttw => ttw.TechnicalTeamId);
+
+            modelBuilder.Entity<TechnicalTeamWorker>()
+                .HasOne(ttw => ttw.Worker)
+                .WithMany(w => w.TechnicalTeams)
+                .HasForeignKey(ttw => ttw.WorkerId);
 
 
 

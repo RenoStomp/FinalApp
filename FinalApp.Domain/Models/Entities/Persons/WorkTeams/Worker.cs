@@ -10,7 +10,7 @@ namespace FinalApp.Domain.Models.Entities.Persons.WorkTeams
         public DateTime HireTime { get; set; }= DateTime.UtcNow;
         public Roles Position { get; set; } = Roles.TechnicalWorker;
 
-        public List<TechnicalTeam> TechnicalTeams { get; set;} 
+        public ICollection<TechnicalTeamWorker> TechnicalTeams { get; set;} 
         public int? TeamId { get; set; }
     }
 }
