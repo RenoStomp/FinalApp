@@ -82,6 +82,10 @@ namespace FinalApp.DAL.SqlServer
                 .WithMany(template => template.EcoBoxes)
                 .HasForeignKey(ecobox => ecobox.TemplateId);
 
+            modelBuilder.Entity<SupplierCompany>()
+                .HasMany(supplier => supplier.EcoBoxTemplates)
+                .WithOne(template => template.SupplierCompany)
+
 
         }
 
