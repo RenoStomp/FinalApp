@@ -23,4 +23,8 @@
     <Folder Include="NewFolder\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FinalApp.Domain\FinalApp.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
