@@ -72,8 +72,15 @@ namespace FinalApp.DAL.SqlServer
                 .HasForeignKey(ttw => ttw.WorkerId);
 
 
+            modelBuilder.Entity<Location>()
+                .HasMany(location => location.EcoBoxes)
+                .WithOne(ecobox => ecobox.Location)
+                .HasForeignKey(ecobox => ecobox.LocationId);
 
-
+            modelBuilder.Entity<EcoBox>()
+                .HasOne(ecobox => ecobox.Template)
+                .WithMany(template => template.EcoBoxes)
+                .HasForeignKey(ecobox => ecobox.TemplateId);
 
 
         }
