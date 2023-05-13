@@ -52,6 +52,11 @@ namespace FinalApp.DAL.SqlServer
                 .WithOne(request =>  request.TechnicalTeam)
                 .HasForeignKey<Request>(request => request.TeamId);
 
+            modelBuilder.Entity<Location>()
+                .HasOne(location => location.Request)
+                .WithOne(request => request.Location)
+                .HasForeignKey<Request>(request => request.LocationId);
+
 
             modelBuilder.Entity<TechnicalTeamWorker>()
                  .HasKey(ttw => new { ttw.TechnicalTeamId, ttw.WorkerId });
