@@ -3,6 +3,7 @@ using FinalApp.Domain.Models.Entities.Persons.WorkTeams;
 using FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace FinalApp.DAL.SqlServer
 {
@@ -85,8 +86,25 @@ namespace FinalApp.DAL.SqlServer
             modelBuilder.Entity<SupplierCompany>()
                 .HasMany(supplier => supplier.EcoBoxTemplates)
                 .WithOne(template => template.SupplierCompany)
+                .HasForeignKey(template => template.SupplierId);
 
 
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var connectionString = config.GetConnectionString("ConnectionString")
+                ?? throw new InvalidOperationException(
+                    "Connection string 'ConnectionString' not found.");
+
+            optionsBuilder.UseSqlServer(connectionString, builder =>
+            {
+                builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+            });
         }
 
 
