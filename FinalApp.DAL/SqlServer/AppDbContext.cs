@@ -28,16 +28,31 @@ namespace FinalApp.DAL.SqlServer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Client>()
-                .HasMany(client => client.Rrequests)
-                .WithOne(request => request.Client)
-                .HasForeignKey(request => request.ClientId);
+                 .HasMany(client => client.Rrequests)
+                 .WithOne(request => request.Client)
+                 .HasForeignKey(request => request.ClientId);
 
             modelBuilder.Entity<SupportOperator>()
                  .HasMany(support => support.Requests)
                  .WithOne(request => request.SupportOperator)
                  .HasForeignKey(request => request.OperatorId);
 
-           
+            
+
+
+
+            modelBuilder.Entity<Review>()
+                 .HasOne(review => review.Request)
+                 .WithOne(request => request.Review)
+                 .HasForeignKey<Request>(request => request.ReviewId);
+
+            modelBuilder.Entity<TechnicalTeam>()
+                .HasOne(team =>  team.Request)
+                .WithOne(request =>  request.TechnicalTeam)
+                .HasForeignKey<Request>(request => request.TeamId);
+
+
+
 
 
 
