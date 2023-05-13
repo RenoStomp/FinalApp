@@ -3,7 +3,6 @@ using FinalApp.Domain.Models.Entities.Persons.WorkTeams;
 using FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace FinalApp.DAL.SqlServer
 {
@@ -11,10 +10,10 @@ namespace FinalApp.DAL.SqlServer
     {
         public DbSet<Client> Clients { get; set; }
         public DbSet<SupportOperator> SupportOperators { get; set; }
-        public DbSet<TechnicalTeam> TechnicalTeams { get; set;}
+        public DbSet<TechnicalTeam> TechnicalTeams { get; set; }
         public DbSet<Worker> Workers { get; set; }
         public DbSet<EcoBox> EcoBoxes { get; set; }
-        public DbSet<EcoBoxTemplate> EcoBoxTemplates { get; set;}
+        public DbSet<EcoBoxTemplate> EcoBoxTemplates { get; set; }
         public DbSet<SupplierCompany> SuppliersCompanies { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<RecyclingPlant> RecyclingPlants { get; set; }
@@ -49,8 +48,8 @@ namespace FinalApp.DAL.SqlServer
                  .HasForeignKey<Request>(request => request.ReviewId);
 
             modelBuilder.Entity<TechnicalTeam>()
-                .HasOne(team =>  team.Request)
-                .WithOne(request =>  request.TechnicalTeam)
+                .HasOne(team => team.Request)
+                .WithOne(request => request.TechnicalTeam)
                 .HasForeignKey<Request>(request => request.TeamId);
 
             modelBuilder.Entity<Location>()
