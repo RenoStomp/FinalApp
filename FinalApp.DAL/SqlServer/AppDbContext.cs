@@ -37,7 +37,10 @@ namespace FinalApp.DAL.SqlServer
                  .WithOne(request => request.SupportOperator)
                  .HasForeignKey(request => request.OperatorId);
 
-            
+            modelBuilder.Entity<RecyclingPlant>()
+                .HasMany(plant => plant.Requests)
+                .WithOne(request => request.RecyclingPlant)
+                .HasForeignKey(request => request.PlantId);
 
 
 
