@@ -25,22 +25,6 @@ namespace FinalApp.DAL.SqlServer
         {
             Database.EnsureCreated();
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    base.OnConfiguring(optionsBuilder);
-        //    IConfiguration config = new ConfigurationBuilder()
-        //        .AddJsonFile("appsettings.json")
-        //        .Build();
-
-        //    var connectionString = config.GetConnectionString("ConnectionString")
-        //        ?? throw new InvalidOperationException(
-        //            "Connection string 'ConnectionString' not found.");
-
-        //    optionsBuilder.UseSqlServer(connectionString, builder =>
-        //    {
-        //        builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
-        //    });
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
