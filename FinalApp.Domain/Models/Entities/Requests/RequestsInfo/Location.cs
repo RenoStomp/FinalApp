@@ -6,6 +6,6 @@ namespace FinalApp.Domain.Models.Entities.Requests.RequestsInfo
     public class Location : BaseLocation
     {
         public Request? Request { get; set; }
-        public List<EcoBox>? EcoBoxes { get; set; }
+        public ICollection<EcoBox>? EcoBoxes { get; set; }
     }
 }

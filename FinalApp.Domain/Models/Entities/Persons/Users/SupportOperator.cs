@@ -8,6 +8,6 @@ namespace FinalApp.Domain.Models.Entities.Persons.Users
     {
         public override Roles UserType { get; set; } = Roles.TechnicalSupportOperator;
 
-        public List<Request>?  Requests { get; set; }
+        public ICollection<Request>?  Requests { get; set; }
     }
 }

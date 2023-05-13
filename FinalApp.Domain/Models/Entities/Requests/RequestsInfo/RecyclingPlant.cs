@@ -6,6 +6,6 @@ namespace FinalApp.Domain.Models.Entities.Requests.RequestsInfo
     {
         public int Income { get; set; }
 
-        public List<Request>? Requests { get; set; }
+        public ICollection<Request>? Requests { get; set; }
     }
 }

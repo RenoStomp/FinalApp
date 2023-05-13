@@ -6,6 +6,6 @@ namespace FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo
     {
         public int MaterialPrice { get; set; }
 
-        public List<EcoBoxTemplate>? EcoBoxTemplates { get; set; }
+        public ICollection<EcoBoxTemplate>? EcoBoxTemplates { get; set; }
     }
 }
