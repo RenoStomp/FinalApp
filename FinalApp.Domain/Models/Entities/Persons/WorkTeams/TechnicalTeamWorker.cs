@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FinalApp.Domain.Models.Entities.Persons.Users;
 
 namespace FinalApp.Domain.Models.Entities.Persons.WorkTeams
 {
-    internal class TechnicalTeamWorker
+    public class TechnicalTeamWorker
     {
+        public int? TechnicalTeamId { get; set; }
+        public TechnicalTeam TechnicalTeam { get; set; }
+
+        public int? WorkerId { get; set; }
+        public Worker Worker { get; set; }
     }
 }

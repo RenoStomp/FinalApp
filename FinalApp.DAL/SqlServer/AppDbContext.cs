@@ -21,10 +21,26 @@ namespace FinalApp.DAL.SqlServer
         public DbSet<Request> Requests { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options = null) : base(options)
         {
             Database.EnsureCreated();
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
+        //    IConfiguration config = new ConfigurationBuilder()
+        //        .AddJsonFile("appsettings.json")
+        //        .Build();
+
+        //    var connectionString = config.GetConnectionString("ConnectionString")
+        //        ?? throw new InvalidOperationException(
+        //            "Connection string 'ConnectionString' not found.");
+
+        //    optionsBuilder.UseSqlServer(connectionString, builder =>
+        //    {
+        //        builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+        //    });
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -58,7 +74,6 @@ namespace FinalApp.DAL.SqlServer
                 .WithOne(request => request.Location)
                 .HasForeignKey<Request>(request => request.LocationId);
 
-
             modelBuilder.Entity<TechnicalTeamWorker>()
                  .HasKey(ttw => new { ttw.TechnicalTeamId, ttw.WorkerId });
 
@@ -71,7 +86,6 @@ namespace FinalApp.DAL.SqlServer
                 .HasOne(ttw => ttw.Worker)
                 .WithMany(w => w.TechnicalTeams)
                 .HasForeignKey(ttw => ttw.WorkerId);
-
 
             modelBuilder.Entity<Location>()
                 .HasMany(location => location.EcoBoxes)
@@ -90,23 +104,5 @@ namespace FinalApp.DAL.SqlServer
 
 
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            IConfiguration config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            var connectionString = config.GetConnectionString("ConnectionString")
-                ?? throw new InvalidOperationException(
-                    "Connection string 'ConnectionString' not found.");
-
-            optionsBuilder.UseSqlServer(connectionString, builder =>
-            {
-                builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
-            });
-        }
-
-
     }
 }
