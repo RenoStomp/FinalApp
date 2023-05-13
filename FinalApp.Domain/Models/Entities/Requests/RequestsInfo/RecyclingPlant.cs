@@ -1,6 +1,6 @@
 ﻿using FinalApp.Domain.Models.Common.BaseRequests;
 
-namespace FinalApp.Domain.Models.Entities.Requests.RequestInfo
+namespace FinalApp.Domain.Models.Entities.Requests.RequestsInfo
 {
     public class RecyclingPlant : CompanyContactInfo
     {

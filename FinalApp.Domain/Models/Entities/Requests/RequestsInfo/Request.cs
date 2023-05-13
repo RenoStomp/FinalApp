@@ -2,9 +2,9 @@
 using FinalApp.Domain.Models.Entities.Persons.Users;
 using FinalApp.Domain.Models.Enums;
 
-namespace FinalApp.Domain.Models.Entities.Requests.RequestInfo
+namespace FinalApp.Domain.Models.Entities.Requests.RequestsInfo
 {
-    public class Request : Common.BaseRequests.RequestInfo
+    public class Request : RequestInfo
     {
         public string? Comment { get; set; }
         public int BoxQuantity { get; set; }
