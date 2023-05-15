@@ -6,5 +6,8 @@ namespace FinalApp.Domain.Models.Common.BaseRequests
     {
         public virtual Status RequestStatus { get; set; }
         public virtual Types RequestType { get; set; }
+
+        public bool StatusClientInfo { get; set; } = false;
+        public bool StatusTeamInfo { get; set; } = false;
     }
 }
