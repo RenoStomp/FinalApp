@@ -4,7 +4,7 @@ namespace FinalApp.Domain.Models.Common.BaseRequests
 {
     public abstract class RequestInfo : BaseRequest
     {
-        public abstract Status RequestStatus { get; set; }
-        public abstract Types RequestType { get; set; }
+        public virtual Status RequestStatus { get; set; }
+        public virtual Types RequestType { get; set; }
     }
 }
