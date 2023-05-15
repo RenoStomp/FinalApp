@@ -9,6 +9,7 @@ namespace FinalApp.Domain.Models.Entities.Requests.RequestsInfo
         public string? Comment { get; set; }
         public int BoxQuantity { get; set; }
         public DateTime CompletedTime { get; set; }
+        public WorkTypes WorkType { get; set; }
 
 
 
