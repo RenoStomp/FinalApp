@@ -57,6 +57,7 @@ namespace FinalApp.DAL.SqlServer
                 .WithOne(request => request.Location)
                 .HasForeignKey<Request>(request => request.LocationId);
 
+
             modelBuilder.Entity<TechnicalTeamWorker>()
                  .HasKey(ttw => new { ttw.TechnicalTeamId, ttw.WorkerId });
 
@@ -69,6 +70,7 @@ namespace FinalApp.DAL.SqlServer
                 .HasOne(ttw => ttw.Worker)
                 .WithMany(w => w.TechnicalTeams)
                 .HasForeignKey(ttw => ttw.WorkerId);
+
 
             modelBuilder.Entity<Location>()
                 .HasMany(location => location.EcoBoxes)
