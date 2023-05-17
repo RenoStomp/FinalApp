@@ -60,14 +60,16 @@ namespace FinalApp.DAL.Repository.Implemintations
         }
 
 
-        public async Task DeleteAsync(T item)
+        public async Task DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await ReadByIdAsync(id);
+            await DeleteAsync(entity);
         }
 
    
