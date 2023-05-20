@@ -30,8 +30,6 @@ namespace FinalApp.DAL.Repository.Implemintations
             return reviews.AsQueryable();
         }
 
-        // Другие методы для работы с отзывами
-
         public async Task<bool> CanCreateReview(int requestId)
         {
             var request = await _context.Requests.FindAsync(requestId);
