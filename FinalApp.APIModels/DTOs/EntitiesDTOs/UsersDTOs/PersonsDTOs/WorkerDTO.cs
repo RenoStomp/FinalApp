@@ -1,15 +1,14 @@
-﻿using FinalApp.Domain.Models.Common.BaseUsersInfo;
+﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
 using FinalApp.Domain.Models.Enums;
 
-namespace FinalApp.Domain.Models.Entities.Persons.WorkTeams
+namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.UsersDTOs.PersonsDTO
 {
-    public class Worker : PersonalContactInfo
+    public class WorkerDTO : BaseEntityDTO
     {
         public string Salary { get; set; }
         public DateTime HireTime { get; set; }
         public Roles Position { get; set; } = Roles.TechnicalWorker;
 
-        public ICollection<TechnicalTeamWorker> TechnicalTeams { get; set; }
         public int? TechTeamId { get; set; }
     }
 }

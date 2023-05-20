@@ -12,7 +12,7 @@ namespace FinalApp.Domain.Models.Entities.Requests.RequestsInfo
         public WorkTypes WorkType { get; set; }
 
         public override Types RequestType { get; set; } = Types.RequestExecution;
-        public override Status RequestStatus { get; set; } = Status.InProgress;
+        public override Status RequestStatus { get; set; }
 
         public Client Client { get; set; }
         public int? ClientId { get; set; }
