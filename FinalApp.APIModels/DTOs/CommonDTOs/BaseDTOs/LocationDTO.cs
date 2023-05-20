@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs
+﻿namespace FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs
 {
-    internal class BaseLocationDTO
+    public class LocationDTO : BaseEntityDTO
     {
+        public string City { get; set; }
+        public string Street { get; set; }
+        public string HouseNumber { get; set; }
+        public string? ApartmentNumber { get; set; }
+        public string ZipCode { get; set; }
     }
 }

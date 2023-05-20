@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO
+﻿namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO
 {
-    internal class EcoBoxDTO
+    public class EcoBoxDTO
     {
+        public int ProductPrice { get; set; }
+        public int WearDegree { get; set; }
+        public int? LocationId { get; set; }
+        public int? TemplateId { get; set; }
     }
 }

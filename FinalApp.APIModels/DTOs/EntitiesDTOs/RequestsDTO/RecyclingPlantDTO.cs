@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
+using FinalApp.Domain.Models.Common.BaseRequests;
 
 namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO
 {
-    internal class RecyclingPlantDTO
+    public class RecyclingPlantDTO : LocationDTO
     {
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public int Income { get; set; }
+
     }
 }

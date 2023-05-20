@@ -6,6 +6,5 @@ namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.UsersDTOs
     public class ClientDTO : UsersDTO
     {
         public  Roles UserType { get; set; } = Roles.Client;
-
     }
 }

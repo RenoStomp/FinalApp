@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
+using FinalApp.Domain.Models.Enums;
 
 namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.UsersDTOs
 {
-    internal class TechnicalTeamDTO
+    public class TechnicalTeamDTO : UsersDTO
     {
+        public  Roles UserType { get; set; } = Roles.TechnicalSpecialist;
+        public int? WorkerId { get; set; }
+
     }
 }

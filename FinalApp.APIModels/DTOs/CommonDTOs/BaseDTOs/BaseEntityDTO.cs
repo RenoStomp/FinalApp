@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs
+﻿namespace FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs
 {
-    internal class BaseEntityDTOs
+    public abstract class BaseEntityDTO
     {
+        public int? Id { get; set; }
+
     }
 }

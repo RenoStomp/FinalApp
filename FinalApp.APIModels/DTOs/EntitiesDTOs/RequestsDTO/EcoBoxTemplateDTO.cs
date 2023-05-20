@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FinalApp.Domain.Models.Enums;
 
 namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO
 {
-    internal class EcoBoxTemplateDTO
+    public class EcoBoxTemplateDTO
     {
+        public Materials MaterialType { get; set; }
+        public TrashTypes TrashType { get; set; }
+        public string Capacity { get; set; }
+        public int? SupplierId { get; set; }
+
     }
 }
