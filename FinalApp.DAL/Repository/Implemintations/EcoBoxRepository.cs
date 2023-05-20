@@ -2,10 +2,8 @@
 using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.DAL.SqlServer;
 using FinalApp.Domain.Models.Common.BaseRequests;
+using FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FinalApp.DAL.Repository.Implementations
 {
@@ -19,19 +17,21 @@ namespace FinalApp.DAL.Repository.Implementations
         public async Task<IQueryable<T>> GetEcoBoxesByLocationId(int locationId)
         {
             var ecoBoxes = await _dbSet
+                .OfType<EcoBox>()
                 .Where(e => e.LocationId == locationId)
                 .ToListAsync();
 
-            return ecoBoxes.AsQueryable();
+            return ecoBoxes.Cast<T>().AsQueryable();
         }
 
         public async Task<IQueryable<T>> GetEcoBoxesByTemplateId(int templateId)
         {
             var ecoBoxes = await _dbSet
+                .OfType<EcoBox>()
                 .Where(e => e.TemplateId == templateId)
                 .ToListAsync();
 
-            return ecoBoxes.AsQueryable();
+            return ecoBoxes.Cast<T>().AsQueryable();
         }
 
     }
