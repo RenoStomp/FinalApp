@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinalApp.DAL.Repository.Implemintations
 {
-    public class BaseAsyncRepository<T> : IAsyncReposytory<T>
+    public class BaseAsyncRepository<T> : IBaseAsyncRepository<T>
         where T : BaseEntity
     {
         protected readonly AppDbContext _context;
