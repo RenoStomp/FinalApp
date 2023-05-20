@@ -46,4 +46,11 @@ public interface IRequestRepository
     /// <param name="requestId">The ID of the request.</param>
     /// <returns>An asynchronous operation that represents the marking of the request as completed.</returns>
     Task MarkRequestAsCompleted(int requestId);
+    /// <summary>
+    /// Assigns a location to a request.
+    /// </summary>
+    /// <param name="requestId">The ID of the request.</param>
+    /// <param name="locationId">The ID of the location.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    public Task AssignLocationToRequest(int requestId, int locationId);
 }

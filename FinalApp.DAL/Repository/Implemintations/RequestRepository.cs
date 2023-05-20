@@ -71,5 +71,17 @@ namespace FinalApp.DAL.Repository.Implemintations
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task AssignLocationToRequest(int requestId, int locationId)
+        {
+            var request = await _context.Requests.FindAsync(requestId);
+            var location = await _context.Locations.FindAsync(locationId);
+
+            if (request != null && location != null)
+            {
+                request.Location = location;
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 }
