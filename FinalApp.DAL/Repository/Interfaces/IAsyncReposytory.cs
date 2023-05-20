@@ -1,9 +1,4 @@
 ﻿using FinalApp.Domain.Models.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinalApp.DAL.Repository.Interfaces
 {
@@ -11,17 +6,59 @@ namespace FinalApp.DAL.Repository.Interfaces
         where T : BaseEntity
     {
         /// <summary>
-        /// Creates one object and adds it to database
+        /// Creates a record in the database and adds the entity.
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">The entity to be added.</param>
         /// <returns></returns>
-        public Task Create(T entity);           // C - Create
-        public IQueryable<T> Get();             // R - Read all
-        public Task<IQueryable<T>> GetAsync();  // R - Read all async
-        public T GetById(int id);               // R - Read one
-        public Task<T> GetByIdAsync(int id);    // R - Read one async
-        public Task Update(T Item);             // U - Update
-        public Task Delete(T item);             // D - Delete by model
-        public Task DeleteById(int id);         // D - Delete by id
+        public Task Create(T entity);
+
+        /// <summary>
+        /// Retrieves all records from the database.
+        /// </summary>
+        /// <returns>A query that returns all records.</returns>
+        public IQueryable<T> ReadAll();
+
+        /// <summary>
+        /// Asynchronously retrieves all records from the database.
+        /// </summary>
+        /// <returns>A task that returns a query that returns all records.</returns>
+        public Task<IQueryable<T>> ReadAllAsync();
+
+        /// <summary>
+        /// Retrieves an entity by the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the entity.</param>
+        /// <returns>The entity with the specified identifier.</returns>
+        public T ReadById(int id);
+
+        /// <summary>
+        /// Asynchronously retrieves an entity by the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the entity.</param>
+        /// <returns>A task that returns the entity with the specified identifier.</returns>
+        public Task<T> ReadByIdAsync(int id);
+
+        /// <summary>
+        /// Updates the specified entity in the database.
+        /// </summary>
+        /// <param name="item">The entity to be updated.</param>
+        /// <returns></returns>
+        public Task UpdateAsync(T item);
+
+        /// <summary>
+        /// Deletes the specified entity from the database.
+        /// </summary>
+        /// <param name="item">The entity to be deleted.</param>
+        /// <returns></returns>
+        public Task DeleteAsync(T item);
+
+        /// <summary>
+        /// Deletes the entity with the specified identifier from the database.
+        /// </summary>
+        /// <param name="id">The identifier of the entity.</param>
+        /// <returns></returns>
+        public Task DeleteByIdAsync(int id);
+
+
     }
 }
