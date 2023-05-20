@@ -35,5 +35,15 @@ namespace FinalApp.DAL.Repository.Interfaces
         /// <param name="requestId">The ID of the request.</param>
         /// <returns>An asynchronous operation.</returns>
         Task MarkRequestAsCompleted(int requestId);
+
+        /// <summary>
+        /// Sets the quantity and template of eco boxes for the specified request.
+        /// This method is intended to be used by the TechnicalTeam controller.
+        /// </summary>
+        /// <param name="requestId">The identifier of the request.</param>
+        /// <param name="quantity">The quantity of eco boxes to set.</param>
+        /// <param name="templateId">The identifier of the eco box template.</param>
+        /// <returns>An asynchronous task.</returns>
+        public Task SetEcoBoxQuantityAndTemplate(int requestId, int quantity, int templateId);
     }
 }

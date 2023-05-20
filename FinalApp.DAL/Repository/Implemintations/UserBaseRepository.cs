@@ -87,5 +87,39 @@ namespace FinalApp.DAL.Repository.Implemintations
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task SetEcoBoxQuantityAndTemplate(int requestId, int quantity, int templateId)
+        {
+            var request = await _context.Requests.Include(r => r.Location)
+                .ThenInclude(location => location.EcoBoxes)
+                .FirstOrDefaultAsync(request => request.Id == requestId);
+
+            if (request != null)
+            {
+                if (request.Location != null && request.Location.EcoBoxes != null && request.Location.EcoBoxes.Any())
+                {
+                    var ecoBoxTemplate = await _context.EcoBoxTemplates.FindAsync(templateId);
+                    if (ecoBoxTemplate != null)
+                    {
+                        var ecoBoxesToUpdate = request.Location.EcoBoxes.Take(quantity);
+
+                        foreach (var ecoBox in ecoBoxesToUpdate)
+                        {
+                            ecoBox.Template = ecoBoxTemplate;
+                        }
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Invalid EcoBoxTemplateId.");
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Location or EcoBoxes associated with the Request are not available.");
+                }
+
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

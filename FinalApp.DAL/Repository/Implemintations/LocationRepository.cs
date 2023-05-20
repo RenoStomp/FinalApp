@@ -2,7 +2,6 @@
 using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.DAL.SqlServer;
 using FinalApp.Domain.Models.Common.BaseRequests;
-using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalApp.DAL.Repository.Implementations
@@ -36,7 +35,8 @@ namespace FinalApp.DAL.Repository.Implementations
         public async Task<T> GetLocationByRequestId(int requestId)
         {
             var location = await _dbSet
-                .SingleOrDefaultAsync(location => _context.Requests.Any(request => request.LocationId == location.Id && request.Id == requestId));
+                .SingleOrDefaultAsync(location => _context.Requests
+                .Any(request => request.LocationId == location.Id && request.Id == requestId));
 
             return location;
         }

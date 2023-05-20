@@ -6,7 +6,7 @@ namespace FinalApp.DAL.Repository.Interfaces
     /// Represents a repository for managing entities.
     /// </summary>
     /// <typeparam name="T">managed entity</typeparam>
-    public interface IAsyncReposytory<T>
+    public interface IBaseAsyncRepository<T>
         where T : BaseEntity
     {
         /// <summary>
