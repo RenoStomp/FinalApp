@@ -10,4 +10,13 @@
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\Common\" />
+    <Folder Include="DTO\EntitiesDTO\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FinallApp.ValidationHelper\FinallApp.ValidationHelper.csproj" />
+  </ItemGroup>
+
 </Project>
