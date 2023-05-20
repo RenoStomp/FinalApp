@@ -2,18 +2,13 @@
 using FinalApp.DAL.SqlServer;
 using FinalApp.Domain.Models.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinalApp.DAL.Repository.Implemintations
 {
-    public class BaseAsyncRepository<T> : IAsyncReposytory<T> 
+    public class BaseAsyncRepository<T> : IAsyncReposytory<T>
         where T : BaseEntity
     {
-        private readonly AppDbContext _context;
+        protected readonly AppDbContext _context;
         protected readonly DbSet<T> _dbSet;
         public BaseAsyncRepository(AppDbContext context)
         {
@@ -71,15 +66,5 @@ namespace FinalApp.DAL.Repository.Implemintations
             var entity = await ReadByIdAsync(id);
             await DeleteAsync(entity);
         }
-
-   
-
-   
-
-       
-
- 
-
-
     }
 }
