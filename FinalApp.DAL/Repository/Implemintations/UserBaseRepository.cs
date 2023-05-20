@@ -20,11 +20,11 @@ namespace FinalApp.DAL.Repository.Implemintations
             var activeRequests = typeof(T) switch
             {
                 Type techTeamType when techTeamType == typeof(TechnicalTeam) => await _context.Requests
-                    .Where(r => r.TechTeamId == Id && r.RequestStatus == Status.Active)
+                    .Where(request => request.TechTeamId == Id && request.RequestStatus == Status.Active)
                     .ToListAsync(),
 
                 Type supportOperatorType when supportOperatorType == typeof(SupportOperator) => await _context.Requests
-                    .Where(r => r.OperatorId == Id && r.RequestStatus == Status.Active)
+                    .Where(request => request.OperatorId == Id && request.RequestStatus == Status.Active)
                     .ToListAsync(),
 
                 _ => throw new ArgumentNullException(nameof(DbSet<T>))
@@ -38,11 +38,11 @@ namespace FinalApp.DAL.Repository.Implemintations
             var closedRequests = typeof(T) switch
             {
                 Type techTeamType when techTeamType == typeof(TechnicalTeam) => await _context.Requests
-                    .Where(r => r.TechTeamId == Id && r.RequestStatus == Status.Closed)
+                    .Where(request => request.TechTeamId == Id && request.RequestStatus == Status.Closed)
                     .ToListAsync(),
 
                 Type supportOperatorType when supportOperatorType == typeof(SupportOperator) => await _context.Requests
-                    .Where(r => r.OperatorId == Id && r.RequestStatus == Status.Closed)
+                    .Where(request => request.OperatorId == Id && request.RequestStatus == Status.Closed)
                     .ToListAsync(),
 
                 _ => throw new ArgumentNullException(nameof(DbSet<T>))
