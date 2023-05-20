@@ -41,9 +41,12 @@ namespace FinalApp.DAL.Repository.Implemintations
 
         public async Task MarkRequestAsCompleted(int requestId)
         {
-            throw new NotImplementedException();
+            var request = await _context.Requests.FindAsync(requestId);
+            if (request != null)
+            {
+                request.RequestStatus = Status.Completed;
+                await _context.SaveChangesAsync();
+            }
         }
-
-
     }
 }
