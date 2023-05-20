@@ -2,10 +2,10 @@
 
 namespace FinalApp.DAL.Repository.Interfaces
 {
-    internal interface ITechnicalTeamRepository
+    public interface IUserBaseRepository
     {
-        public Task<IQueryable<Request>> GetActiveRequestsForBrigade(int techTeamId);
-        public Task<IQueryable<Request>> GetClosedRequestsForBrigade(int techTeamId);
+        public Task<IQueryable<Request>> GetActiveRequests(int techTeamId);
+        public Task<IQueryable<Request>> GetClosedRequests(int techTeamId);
         public Task AcceptRequest(int requestId, int techTeamId);
         public Task MarkRequestAsCompleted(int requestId);
 
