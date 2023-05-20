@@ -11,11 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\Common\" />
-    <Folder Include="DTO\EntitiesDTO\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\FinalApp.Domain\FinalApp.Domain.csproj" />
     <ProjectReference Include="..\FinallApp.ValidationHelper\FinallApp.ValidationHelper.csproj" />
   </ItemGroup>
 
