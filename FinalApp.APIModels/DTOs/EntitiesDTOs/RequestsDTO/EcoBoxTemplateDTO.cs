@@ -1,8 +1,9 @@
-﻿using FinalApp.Domain.Models.Enums;
+﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
+using FinalApp.Domain.Models.Enums;
 
 namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO
 {
-    public class EcoBoxTemplateDTO
+    public class EcoBoxTemplateDTO : BaseEntityDTO
     {
         public Materials MaterialType { get; set; }
         public TrashTypes TrashType { get; set; }

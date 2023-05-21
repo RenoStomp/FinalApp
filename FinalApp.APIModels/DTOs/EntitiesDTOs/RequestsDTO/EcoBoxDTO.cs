@@ -1,6 +1,8 @@
-﻿namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO
+﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
+
+namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO
 {
-    public class EcoBoxDTO
+    public class EcoBoxDTO : BaseEntityDTO
     {
         public int ProductPrice { get; set; }
         public int WearDegree { get; set; }

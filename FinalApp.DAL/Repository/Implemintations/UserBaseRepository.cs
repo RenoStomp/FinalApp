@@ -51,7 +51,7 @@ namespace FinalApp.DAL.Repository.Implemintations
             return closedRequests.AsQueryable();
         }
 
-        public async Task AcceptRequest(int requestId, int Id)
+        public async Task AcceptRequest(int requestId, int userId)
         {
             var request = await _context.Requests.FindAsync(requestId);
 
@@ -61,12 +61,12 @@ namespace FinalApp.DAL.Repository.Implemintations
                 {
                     case Type techTeamType when techTeamType == typeof(TechnicalTeam):
                         request.RequestStatus = Status.InProgress;
-                        request.TechTeamId = Id;
+                        request.TechTeamId = userId;
                         break;
 
                     case Type supportOperatorType when supportOperatorType == typeof(SupportOperator):
                         request.RequestStatus = Status.InProgress;
-                        request.OperatorId = Id;
+                        request.OperatorId = userId;
                         break;
 
                     default:

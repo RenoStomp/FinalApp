@@ -24,7 +24,7 @@ namespace FinalApp.ApiModels.Response.Implemintations
                 }
                 catch(ArgumentNullException exception)
                 {
-                    _message += $"ERROR: {exception}";
+                    _message += $"\nERROR: {exception}";
                 }
             }
         }
@@ -47,7 +47,7 @@ namespace FinalApp.ApiModels.Response.Implemintations
                 }
                 catch(ArgumentException exception)
                 {
-                    _message += $"ERROR: {exception}";
+                    _message += $"\nERROR: {exception}";
 
                 }
             }
@@ -71,7 +71,7 @@ namespace FinalApp.ApiModels.Response.Implemintations
                 }
                 catch(ArgumentNullException exception)
                 {
-                    _message += $"ERROR: {exception}";
+                    _message += $"\nERROR: {exception}";
                 }
             }
         }
