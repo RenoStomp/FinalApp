@@ -31,15 +31,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<List<Review>>.CheckIsNotNullObject(reviews);
                 IEnumerable<ReviewDTO> reviewsDTO = MapperHelper<Review, ReviewDTO>.Map(reviews);
 
-                return ResponseFactory<ReviewDTO>.CreateSuccessResponse(reviewsDTO);
+                return ResponseFactory<ReviewDTO>.CreateSuccessResponseForModelCollection(reviewsDTO);
             }
             catch (ArgumentNullException exception)
             {
-                return ResponseFactory<ReviewDTO>.CreateNotFoundResponse();
+                return ResponseFactory<IEnumerable<ReviewDTO>>.CreateNotFoundResponseForModelCollection();
             }
             catch (Exception ex)
             {
-                return ResponseFactory<ReviewDTO>.CreateErrorResponse();
+                return ResponseFactory<ReviewDTO>.CreateErrorResponseForModelCollection();
             }
         }
 
