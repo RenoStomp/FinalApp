@@ -1,6 +1,5 @@
 ﻿using FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO;
 using FinalApp.ApiModels.Response.Interfaces;
-using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 
 namespace FinalApp.Services.Interfaces
 {
