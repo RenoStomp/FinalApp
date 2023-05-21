@@ -1,5 +1,4 @@
 ﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
-using FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO;
 using FinalApp.ApiModels.Response.Interfaces;
 using FinalApp.Domain.Models.Common;
 
@@ -16,6 +15,6 @@ namespace FinalApp.Services.Interfaces
         public Task<IBaseResponse<Tmodel>> ReadByIdAsync(int id);
         public Task<IBaseResponse<Tmodel>> UpdateAsync(T item);
         public Task<IBaseResponse<bool>> DeleteAsync(T item);
-        public Task<IBaseResponse<bool>> DeleteByIdAsync(int id); 
+        public Task<IBaseResponse<bool>> DeleteByIdAsync(int id);
     }
 }
