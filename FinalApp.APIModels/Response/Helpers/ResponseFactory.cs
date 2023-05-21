@@ -24,43 +24,47 @@ namespace FinalApp.ApiModels.Response.Helpers
                 StatusCode = 200,
             };
         }
-        public static BaseResponse<IEnumerable<TModel>> CreateNotFoundResponseForModelCollection()
+        public static BaseResponse<IEnumerable<TModel>> CreateNotFoundResponseForModelCollection(Exception exception)
         {
             return new BaseResponse<IEnumerable<TModel>>()
-            {
-                Message = "no records found in the database",
+            {        
                 StatusCode = 0,
                 IsSuccess = false,
+                Message = "no records found in the database\n\r" +
+                    $"Error: {exception}",
             };
         }
 
-        public static BaseResponse<TModel> CreateNotFoundResponseForOneModel()
+        public static BaseResponse<TModel> CreateNotFoundResponseForOneModel(Exception exception)
         {
             return new BaseResponse<TModel>()
             {
-                Message = "no records found in the database",
                 StatusCode = 0,
                 IsSuccess = false,
+                Message = "no records found in the database\n\r" +
+                    $"Error: {exception}",
             };
         }
 
-        public static BaseResponse<IEnumerable<TModel>> CreateErrorResponseForModelCollection()
+        public static BaseResponse<IEnumerable<TModel>> CreateErrorResponseForModelCollection(Exception exception)
         {
             return new BaseResponse<IEnumerable<TModel>>()
-            {
-                Message = "internal server error",
+            {             
                 StatusCode = 500,
                 IsSuccess = false,
+                Message = "internal server error\n\r" +
+                $"Error: {exception}",
             };
         }
 
-        public static BaseResponse<TModel> CreateErrorResponseForOneModel()
+        public static BaseResponse<TModel> CreateErrorResponseForOneModel(Exception exception)
         {
             return new BaseResponse<TModel>()
             {
-                Message = "internal server error",
                 StatusCode = 500,
                 IsSuccess = false,
+                Message = "internal server error\n\r" +
+                $"Error: {exception}",
             };
         }
     }

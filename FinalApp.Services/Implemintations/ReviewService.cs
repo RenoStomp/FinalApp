@@ -35,9 +35,9 @@ namespace FinalApp.Services.Implemintations
             }
             catch (ArgumentNullException exception)
             {
-                return ResponseFactory<IEnumerable<ReviewDTO>>.CreateNotFoundResponseForModelCollection();
+                return ResponseFactory<ReviewDTO>.CreateNotFoundResponseForModelCollection();
             }
-            catch (Exception ex)
+            catch (Exception exp)
             {
                 return ResponseFactory<ReviewDTO>.CreateErrorResponseForModelCollection();
             }
@@ -54,32 +54,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<List<Review>>.CheckIsNotNullObject(reviews);
                 IEnumerable<ReviewDTO> reviewsDTO = MapperHelper<Review, ReviewDTO>.Map(reviews);
 
-                return new BaseResponse<IEnumerable<ReviewDTO>>()
-                {
-                    IsSuccess = true,
-                    Data = reviewsDTO,
-                    StatusCode = 200,
-                };
-
-
+                return ResponseFactory<ReviewDTO>.CreateSuccessResponseForModelCollection(reviewsDTO);
             }
-            catch (ArgumentNullException exception)
+            catch (ArgumentNullException)
             {
-                return new BaseResponse<IEnumerable<ReviewDTO>>()
-                {
-                    Message = "no records found in the database",
-                    StatusCode = 0,
-                    IsSuccess = false,
-                };
+                return ResponseFactory<ReviewDTO>.CreateNotFoundResponseForModelCollection();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return new BaseResponse<IEnumerable<ReviewDTO>>()
-                {
-                    Message = "iternal server error",
-                    StatusCode = 500,
-                    IsSuccess = false,
-                };
+                return ResponseFactory<ReviewDTO>.CreateErrorResponseForModelCollection();
             }
         }
 
