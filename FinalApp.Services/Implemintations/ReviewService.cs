@@ -77,12 +77,13 @@ namespace FinalApp.Services.Implemintations
                 var request = await _requestRepository.ReadAllAsync().Result
                     .FirstOrDefaultAsync(r => r.Id == requestId);
 
-                if (request == null || request.RequestStatus != Status.Completed || request.Review != null)
-                    throw new InvalidOperationException("Unable to create a review for the specified request.");
-
                 ObjectValidator<Request>.CheckIsNotNullObject(request);
 
-                var canCreateReview = request.RequestStatus == Status.Completed && request.Review == null;
+                if (request.RequestStatus != Status.Completed || request.Review != null)
+                    throw new InvalidOperationException("Unable to create a review for the specified request.");
+
+                var canCreateReview = true;
+
                 return ResponseFactory<bool>.CreateSuccessResponseForOneModel(canCreateReview);
             }
             catch (InvalidOperationException invException)
