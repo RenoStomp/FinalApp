@@ -15,8 +15,8 @@ namespace FinalApp.Services.Implemintations
     {
         private const int MinEvaluation = 1;
         private const int MaxEvaluation = 10;
-        public readonly IBaseAsyncRepository<Review> _repository;
-        public readonly IBaseAsyncRepository<Request> _requestRepository;
+        private readonly IBaseAsyncRepository<Review> _repository;
+        private readonly IBaseAsyncRepository<Request> _requestRepository;
 
         public ReviewService(IBaseAsyncRepository<Review> repository, IBaseAsyncRepository<Request> requestRepository)
         {
