@@ -1,14 +1,12 @@
 ﻿using FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO;
 using FinalApp.ApiModels.Response.Implemintations;
 using FinalApp.ApiModels.Response.Interfaces;
-using FinalApp.DAL.Repository.Implemintations;
 using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using FinalApp.Services.Interfaces;
 using FinalApp.Services.Mapping;
 using FinallApp.ValidationHelper;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace FinalApp.Services.Implemintations
 {
@@ -30,9 +28,7 @@ namespace FinalApp.Services.Implemintations
                     .ToListAsync();
 
                 ObjectValidator<List<Review>>.CheckIsNotNullObject(reviews);
-
-                var mapper = AutoMapperConfig<Review, ReviewDTO>.Initialize();
-                IEnumerable<ReviewDTO> reviewsDTO = mapper.Map<IEnumerable<ReviewDTO>>(reviews);
+                IEnumerable<ReviewDTO> reviewsDTO = MapperHelper<Review, ReviewDTO>.Map(reviews);
 
                 return new BaseResponse<IEnumerable<ReviewDTO>>()
                 {
