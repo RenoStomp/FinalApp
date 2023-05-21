@@ -81,6 +81,5 @@ namespace FinalApp.DAL.Repository.Implemintations
                 await _context.SaveChangesAsync();
             }
         }
-
     }
 }

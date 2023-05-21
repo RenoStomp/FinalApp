@@ -1,0 +1,228 @@
+﻿using FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO;
+using FinalApp.ApiModels.Response.Helpers;
+using FinalApp.ApiModels.Response.Interfaces;
+using FinalApp.DAL.Repository.Interfaces;
+using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
+using FinalApp.Domain.Models.Enums;
+using FinalApp.Services.Interfaces;
+using FinalApp.Services.Mapping;
+using FinallApp.ValidationHelper;
+using Microsoft.EntityFrameworkCore;
+
+namespace FinalApp.Services.Implemintations
+{
+    public class RequestService : IRequestService
+    {
+        private readonly IBaseAsyncRepository<Request> _repository;
+        private readonly IBaseAsyncRepository<Location> _locationRepository;
+
+
+        public RequestService(IBaseAsyncRepository<Request> repository, IBaseAsyncRepository<Location> locationRepository)
+        {
+            _repository = repository;
+            _locationRepository = locationRepository;
+        }
+        public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetUnassignedRequests()
+        {
+            try
+            {
+                var unassignedRequests = await _repository
+                    .ReadAllAsync().Result
+                    .Where(request => request.RequestStatus == Status.Active && request.OperatorId == null && request.TechTeamId == null)
+                    .ToListAsync();
+
+
+                ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(unassignedRequests);
+
+                IEnumerable<RequestDTO> unassignedRequestsDTO = MapperHelper<Request, RequestDTO>.Map(unassignedRequests);
+
+                return ResponseFactory<RequestDTO>
+                    .CreateSuccessResponseForModelCollection(unassignedRequestsDTO);
+            }           
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<RequestDTO>
+                    .CreateNotFoundResponseForModelCollection(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<RequestDTO>
+                    .CreateErrorResponseForModelCollection(exception);
+            }
+        }
+        public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetClosedRequestsByOperatorId(int operatorId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(operatorId);
+
+                var closedRequests = await _repository
+                    .ReadAllAsync().Result
+                    .Where(r => r.OperatorId == operatorId && r.RequestStatus == Status.Closed)
+                    .ToListAsync();
+
+                ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(closedRequests);
+
+                IEnumerable<RequestDTO> closedRequestsDTO = MapperHelper<Request, RequestDTO>.Map(closedRequests);
+
+                return ResponseFactory<RequestDTO>
+                    .CreateSuccessResponseForModelCollection(closedRequestsDTO);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<RequestDTO>
+                    .CreateNotFoundResponseForModelCollection(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<RequestDTO>
+                    .CreateErrorResponseForModelCollection(exception);
+            }
+        }
+
+        public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetActiveRequestsByOperatorId(int operatorId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(operatorId);
+
+                var activeRequests = await _repository
+                    .ReadAllAsync().Result
+                    .Where(r => r.OperatorId == operatorId && r.RequestStatus == Status.Active)
+                    .ToListAsync();
+
+                ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(activeRequests);
+
+                IEnumerable<RequestDTO> activeRequestsDTO = MapperHelper<Request, RequestDTO>.Map(activeRequests);
+
+                return ResponseFactory<RequestDTO>
+                    .CreateSuccessResponseForModelCollection(activeRequestsDTO);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<RequestDTO>
+                    .CreateNotFoundResponseForModelCollection(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<RequestDTO>
+                    .CreateErrorResponseForModelCollection(exception);
+            }
+        }
+
+        public async Task<IBaseResponse<bool>> AssignRequestToTeam(int requestId, int teamId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(requestId);
+                NumberValidator<int>.IsPositive(teamId);
+
+                var request = await _repository.ReadByIdAsync(requestId);
+                ObjectValidator<Request>.CheckIsNotNullObject(request);
+
+                request.TechTeamId = teamId;
+                await _repository.UpdateAsync(request);
+
+                return ResponseFactory<bool>
+                    .CreateSuccessResponseForOneModel(true);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<bool>
+                    .CreateErrorResponseForOneModel(exception);
+            }
+        }
+        public async Task<IBaseResponse<bool>> AssignRequestToOperator(int requestId, int operatorId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(requestId);
+                NumberValidator<int>.IsPositive(operatorId);
+
+                var request = await _repository.ReadByIdAsync(requestId);
+
+                ObjectValidator<Request>.CheckIsNotNullObject(request);
+
+                request.OperatorId = operatorId;
+                await _repository.UpdateAsync(request);
+
+                return ResponseFactory<bool>
+                    .CreateSuccessResponseForOneModel(true);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<bool>
+                    .CreateErrorResponseForOneModel(exception);
+            }
+        }
+
+        public async Task<IBaseResponse<bool>> MarkRequestAsCompleted(int requestId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(requestId);
+ 
+                var request = await _repository.ReadByIdAsync(requestId);
+
+                ObjectValidator<Request>.CheckIsNotNullObject(request);
+
+                request.RequestStatus = Status.Completed;
+                await _repository.UpdateAsync(request);
+
+                return ResponseFactory<bool>
+                    .CreateSuccessResponseForOneModel(true);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<bool>
+                    .CreateErrorResponseForOneModel(exception);
+            }
+        }
+
+        public async Task<IBaseResponse<bool>> AssignLocationToRequest(int requestId, int locationId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(requestId);
+                NumberValidator<int>.IsPositive(locationId);
+
+                var request = await _repository.ReadByIdAsync(requestId);
+                var location = await _locationRepository.ReadByIdAsync(locationId);
+
+                ObjectValidator<Request>.CheckIsNotNullObject(request);
+                ObjectValidator<Location>.CheckIsNotNullObject(location);
+
+                request.Location = location;
+                await _repository.UpdateAsync(request);
+
+                return ResponseFactory<bool>
+                    .CreateSuccessResponseForOneModel(true);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<bool>
+                    .CreateErrorResponseForOneModel(exception);
+            }
+        }
+    }
+}

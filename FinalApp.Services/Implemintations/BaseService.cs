@@ -28,17 +28,9 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
                 Tmodel entityDTO = MapperHelper<T, Tmodel>.Map(entity);
 
-                T convertedEntity = entityDTO as T;
-                if (convertedEntity == null)
-                    throw new InvalidOperationException("Failed to convert entity to the specified type.");
-
-                await _repository.Create(convertedEntity);
+                await _repository.Create(entity);
 
                 return ResponseFactory<Tmodel>.CreateSuccessResponseForOneModel(entityDTO);
-            }
-            catch (InvalidOperationException invException)
-            {
-                return ResponseFactory<Tmodel>.CreateInvalidOperationResponseForOneModel(invException);
             }
             catch (ArgumentNullException argNullException)
             {
@@ -59,15 +51,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<IEnumerable<T>>.CheckIsNotNullObject(entities);
                 IEnumerable<Tmodel> entitiesDTO = MapperHelper<T, Tmodel>.Map(entities);
 
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateSuccessResponseForOneModel(entitiesDTO);
+                return ResponseFactory<Tmodel>.CreateSuccessResponseForModelCollection(entitiesDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<Tmodel>.CreateNotFoundResponseForModelCollection(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<Tmodel>.CreateErrorResponseForModelCollection(exception);
             }
         }
 
@@ -80,15 +72,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<IEnumerable<T>>.CheckIsNotNullObject(entities);
                 IEnumerable<Tmodel> entitiesDTO = MapperHelper<T, Tmodel>.Map(entities);
 
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateSuccessResponseForOneModel(entitiesDTO);
+                return ResponseFactory<Tmodel>.CreateSuccessResponseForModelCollection(entitiesDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<Tmodel>.CreateNotFoundResponseForModelCollection(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<Tmodel>.CreateErrorResponseForModelCollection(exception);
             }
         }
 
@@ -96,7 +88,6 @@ namespace FinalApp.Services.Implemintations
         {
             try
             {
-                ObjectValidator<int>.CheckIsNotNullObject(id);
                 NumberValidator<int>.IsPositive(id);
                 var entity = _repository.ReadById(id);
 
@@ -119,7 +110,6 @@ namespace FinalApp.Services.Implemintations
         {
             try
             {
-                ObjectValidator<int>.CheckIsNotNullObject(id);
                 NumberValidator<int>.IsPositive(id);
                 var entity = await _repository.ReadByIdAsync(id);
 
@@ -149,17 +139,9 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
                 Tmodel entityDTO = MapperHelper<T, Tmodel>.Map(entity);
 
-                T convertedEntity = entityDTO as T;
-                if (convertedEntity == null)
-                    throw new InvalidOperationException("Failed to convert entity to the specified type.");
-
-                await _repository.UpdateAsync(convertedEntity);
+                await _repository.UpdateAsync(entity);
 
                 return ResponseFactory<Tmodel>.CreateSuccessResponseForOneModel(entityDTO);
-            }
-            catch (InvalidOperationException invException)
-            {
-                return ResponseFactory<Tmodel>.CreateInvalidOperationResponseForOneModel(invException);
             }
             catch (ArgumentNullException argNullException)
             {
@@ -174,27 +156,26 @@ namespace FinalApp.Services.Implemintations
         {
             try
             {
-                ObjectValidator<T>.CheckIsNotNullObject(item);
+                ObjectValidator<T>
+                    .CheckIsNotNullObject(item);
+
                 Tmodel itemDTO = MapperHelper<T, Tmodel>.Map(item);
 
-                if (!(itemDTO is T convertedItem))
-                    throw new InvalidOperationException("Failed to convert itemDTO to the specified type.");
+                await _repository
+                    .DeleteAsync(item);
 
-                await _repository.DeleteAsync(convertedItem);
-
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
-            }
-            catch (InvalidOperationException invException)
-            {
-                return ResponseFactory<bool>.CreateInvalidOperationResponseForOneModel(invException);
+                return ResponseFactory<bool>
+                    .CreateSuccessResponseForOneModel(true);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>
+                    .CreateErrorResponseForOneModel(exception);
             }
         }
 
@@ -202,7 +183,6 @@ namespace FinalApp.Services.Implemintations
         {
             try
             {
-                ObjectValidator<int>.CheckIsNotNullObject(id);
                 NumberValidator<int>.IsPositive(id);
 
                 await _repository.DeleteByIdAsync(id);
@@ -211,15 +191,18 @@ namespace FinalApp.Services.Implemintations
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(argNullException);
             }
             catch (ArgumentException invException)
             {
-                return ResponseFactory<bool>.CreateInvalidOperationResponseForOneModel(invException);
+                return ResponseFactory<bool>
+                    .CreateInvalidOperationResponseForOneModel(invException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>
+                    .CreateErrorResponseForOneModel(exception);
             }
         }
     }
