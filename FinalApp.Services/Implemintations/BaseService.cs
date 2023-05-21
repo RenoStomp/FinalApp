@@ -30,15 +30,18 @@ namespace FinalApp.Services.Implemintations
 
                 await _repository.Create(entity);
 
-                return ResponseFactory<Tmodel>.CreateSuccessResponseForOneModel(entityDTO);
+                return ResponseFactory<Tmodel>
+                    .CreateSuccessResponseForOneModel(entityDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<Tmodel>
+                    .CreateNotFoundResponseForOneModel(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<Tmodel>
+                    .CreateErrorResponseForOneModel(exception);
             }
         }
 
@@ -51,15 +54,18 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<IEnumerable<T>>.CheckIsNotNullObject(entities);
                 IEnumerable<Tmodel> entitiesDTO = MapperHelper<T, Tmodel>.Map(entities);
 
-                return ResponseFactory<Tmodel>.CreateSuccessResponseForModelCollection(entitiesDTO);
+                return ResponseFactory<Tmodel>
+                    .CreateSuccessResponseForModelCollection(entitiesDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponseForModelCollection(argNullException);
+                return ResponseFactory<Tmodel>
+                    .CreateNotFoundResponseForModelCollection(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<Tmodel>
+                    .CreateErrorResponseForModelCollection(exception);
             }
         }
 
@@ -72,15 +78,18 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<IEnumerable<T>>.CheckIsNotNullObject(entities);
                 IEnumerable<Tmodel> entitiesDTO = MapperHelper<T, Tmodel>.Map(entities);
 
-                return ResponseFactory<Tmodel>.CreateSuccessResponseForModelCollection(entitiesDTO);
+                return ResponseFactory<Tmodel>
+                    .CreateSuccessResponseForModelCollection(entitiesDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponseForModelCollection(argNullException);
+                return ResponseFactory<Tmodel>
+                    .CreateNotFoundResponseForModelCollection(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<Tmodel>
+                    .CreateErrorResponseForModelCollection(exception);
             }
         }
 
@@ -94,15 +103,18 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
                 Tmodel entityDTO = MapperHelper<T, Tmodel>.Map(entity);
 
-                return ResponseFactory<Tmodel>.CreateSuccessResponseForOneModel(entityDTO);
+                return ResponseFactory<Tmodel>
+                    .CreateSuccessResponseForOneModel(entityDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<Tmodel>
+                    .CreateNotFoundResponseForOneModel(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<Tmodel>
+                    .CreateErrorResponseForOneModel(exception);
             }
         }
 
@@ -116,15 +128,18 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
                 Tmodel entityDTO = MapperHelper<T, Tmodel>.Map(entity);
 
-                return ResponseFactory<Tmodel>.CreateSuccessResponseForOneModel(entityDTO);
+                return ResponseFactory<Tmodel>
+                    .CreateSuccessResponseForOneModel(entityDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<Tmodel>
+                    .CreateNotFoundResponseForOneModel(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<Tmodel>
+                    .CreateErrorResponseForOneModel(exception);
             }
         }
 
@@ -141,15 +156,18 @@ namespace FinalApp.Services.Implemintations
 
                 await _repository.UpdateAsync(entity);
 
-                return ResponseFactory<Tmodel>.CreateSuccessResponseForOneModel(entityDTO);
+                return ResponseFactory<Tmodel>
+                    .CreateSuccessResponseForOneModel(entityDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<Tmodel>
+                    .CreateNotFoundResponseForOneModel(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<Tmodel>
+                    .CreateErrorResponseForOneModel(exception);
             }
         }
         public async Task<IBaseResponse<bool>> DeleteAsync(T item)
@@ -187,17 +205,13 @@ namespace FinalApp.Services.Implemintations
 
                 await _repository.DeleteByIdAsync(id);
 
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+                return ResponseFactory<bool>
+                    .CreateSuccessResponseForOneModel(true);
             }
-            catch (ArgumentNullException argNullException)
+            catch (ArgumentException argException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argNullException);
-            }
-            catch (ArgumentException invException)
-            {
-                return ResponseFactory<bool>
-                    .CreateInvalidOperationResponseForOneModel(invException);
+                    .CreateNotFoundResponseForOneModel(argException);
             }
             catch (Exception exception)
             {
