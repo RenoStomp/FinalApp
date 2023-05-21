@@ -1,6 +1,6 @@
 ﻿namespace FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs
 {
-    public class UsersDTO : BaseEntityDTO
+    public class BaseUserDTO : BaseEntityDTO
     {
         public string Name { get; set; }
         public string Surname { get; set; }

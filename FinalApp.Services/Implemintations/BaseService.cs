@@ -208,10 +208,10 @@ namespace FinalApp.Services.Implemintations
                 return ResponseFactory<bool>
                     .CreateSuccessResponseForOneModel(true);
             }
-            catch (ArgumentException argException)
+            catch (ArgumentException invException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argException);
+                    .CreateNotFoundResponseForOneModel(invException);
             }
             catch (Exception exception)
             {
