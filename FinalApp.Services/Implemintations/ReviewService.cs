@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinalApp.Services.Implemintations
 {
-    internal class ReviewService : IReviewService
+    public class ReviewService : IReviewService
     {
         private const int MinEvaluation = 1;
         private const int MaxEvaluation = 10;
