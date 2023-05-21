@@ -15,7 +15,7 @@ namespace FinalApp.Services.Interfaces
         public IBaseResponse<Tmodel> ReadById(int id);
         public Task<IBaseResponse<Tmodel>> ReadByIdAsync(int id);
         public Task<IBaseResponse<Tmodel>> UpdateAsync(T item);
-        public Task<IBaseResponse<Tmodel>> DeleteAsync(T item);
-        public Task<IBaseResponse<Tmodel>> DeleteByIdAsync(int id); 
+        public Task<IBaseResponse<bool>> DeleteAsync(T item);
+        public Task<IBaseResponse<bool>> DeleteByIdAsync(int id); 
     }
 }
