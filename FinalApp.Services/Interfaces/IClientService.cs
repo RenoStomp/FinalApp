@@ -7,6 +7,6 @@ namespace FinalApp.Services.Interfaces
     public interface IClientService
     {
         public Task<IBaseResponse<IEnumerable<Client>>> GetClientsWithRequests();
-        public Task<IBaseResponse<Client>> RegisterClient(ClientDTO client);
+        public Task<IBaseResponse<bool>> RegisterClient(ClientDTO client);
     }
 }

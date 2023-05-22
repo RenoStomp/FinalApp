@@ -7,12 +7,12 @@ namespace FinalApp.Services.Mapping
         where Tmodel : BaseEntityDTO
         where T : BaseEntity
     {
-        public static IEnumerable<T> Map(IEnumerable<T> sourceCollection)
+        public static IEnumerable<T> Map(IEnumerable<Tmodel> sourceCollection)
         {
             var mapper = EntityAutoMapperConfig<Tmodel, T>.Initialize();
             return mapper.Map<IEnumerable<T>>(sourceCollection);
         }
-        public static T Map(T source)
+        public static T Map(Tmodel source)
         {
             var mapper = EntityAutoMapperConfig<Tmodel, T>.Initialize();
             return mapper.Map<T>(source);

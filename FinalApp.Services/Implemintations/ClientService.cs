@@ -43,24 +43,26 @@ namespace FinalApp.Services.Implemintations
 
         }
 
-        public async Task<IBaseResponse<Client>> RegisterClient(ClientDTO client)
+        public async Task<IBaseResponse<bool>> RegisterClient(ClientDTO client)
         {
             try
             {
                 ObjectValidator<ClientDTO>.CheckIsNotNullObject(client);
 
-                var newClient = MapperHelperForDto<Client, ClientDTO>.Map(client);
+                var newClient = MapperHelperForEntity<ClientDTO, Client>.Map(client);
 
-                // Сохранение клиента в репозитории
-                var createdClient = await _repository.Create(newClient);
+                await _repository.Create(newClient);
 
-                // Возвращение успешного ответа с созданным клиентом
-                return ResponseFactory<Client>.CreateSuccessResponse(createdClient);
+                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+            }
+            catch (ArgumentNullException argNullException)
+            {
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(argNullException);
             }
             catch (Exception exception)
             {
-                // Возвращение ошибки в случае возникновения исключения
-                return ResponseFactory<Client>.CreateErrorResponse(exception);
+                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
             }
         }
     }

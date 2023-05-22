@@ -4,7 +4,7 @@
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string FullName
+        public string? FullName
         {
             get
             {
