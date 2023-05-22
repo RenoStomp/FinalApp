@@ -248,16 +248,12 @@ namespace FinalApp.Services.Implemintations
                     if (request.Location != null && request.Location.EcoBoxes != null && request.Location.EcoBoxes.Any())
                     {
                         var template = await _templateRepository.ReadByIdAsync(templateId);
-
                         ObjectValidator<EcoBoxTemplate>.CheckIsNotNullObject(template);
-
-
                         var ecoBoxesToUpdate = request.Location.EcoBoxes.Take(quantity);
-
-                            foreach (var ecoBox in ecoBoxesToUpdate)
-                            {
-                                ecoBox.Template = template;
-                            }                                            
+                        foreach (var ecoBox in ecoBoxesToUpdate)
+                        {
+                            ecoBox.Template = template;
+                        }                                            
                     }
                     else
                     {
@@ -266,9 +262,6 @@ namespace FinalApp.Services.Implemintations
 
                     await _repository.UpdateAsync(request);
 
-                ObjectValidator<Location>.CheckIsNotNullObject(location);
-
-
                 return ResponseFactory<bool>
                     .CreateSuccessResponseForOneModel(true);
             }
@@ -276,6 +269,11 @@ namespace FinalApp.Services.Implemintations
             {
                 return ResponseFactory<bool>
                     .CreateNotFoundResponseForOneModel(argException);
+            }
+            catch (InvalidOperationException invOperationException)
+            {
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(invOperationException);
             }
             catch (Exception exception)
             {
