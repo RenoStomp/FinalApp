@@ -40,7 +40,7 @@ namespace FinalApp.Services.Implemintations
 
                 ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(unassignedRequests);
 
-                IEnumerable<RequestDTO> unassignedRequestsDTO = MapperHelper<Request, RequestDTO>.Map(unassignedRequests);
+                IEnumerable<RequestDTO> unassignedRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(unassignedRequests);
 
                 return ResponseFactory<RequestDTO>
                     .CreateSuccessResponseForModelCollection(unassignedRequestsDTO);
@@ -69,7 +69,7 @@ namespace FinalApp.Services.Implemintations
 
                 ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(closedRequests);
 
-                IEnumerable<RequestDTO> closedRequestsDTO = MapperHelper<Request, RequestDTO>.Map(closedRequests);
+                IEnumerable<RequestDTO> closedRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(closedRequests);
 
                 return ResponseFactory<RequestDTO>
                     .CreateSuccessResponseForModelCollection(closedRequestsDTO);
@@ -99,7 +99,7 @@ namespace FinalApp.Services.Implemintations
 
                 ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(activeRequests);
 
-                IEnumerable<RequestDTO> activeRequestsDTO = MapperHelper<Request, RequestDTO>.Map(activeRequests);
+                IEnumerable<RequestDTO> activeRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(activeRequests);
 
                 return ResponseFactory<RequestDTO>
                     .CreateSuccessResponseForModelCollection(activeRequestsDTO);

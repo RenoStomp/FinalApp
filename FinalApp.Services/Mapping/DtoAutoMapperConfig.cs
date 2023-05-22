@@ -9,7 +9,7 @@ namespace FinalApp.Services.Mapping
     /// </summary>
     /// <typeparam name="T">The type of the source entity.</typeparam>
     /// <typeparam name="Tmodel">The type of the destination DTO.</typeparam>
-    public class AutoMapperConfig<T, Tmodel> 
+    public class DtoAutoMapperConfig<T, Tmodel> 
         where T : BaseEntity
         where Tmodel : BaseEntityDTO
     {

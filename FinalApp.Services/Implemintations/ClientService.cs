@@ -1,8 +1,10 @@
-﻿using FinalApp.ApiModels.Response.Helpers;
+﻿using FinalApp.ApiModels.DTOs.EntitiesDTOs.UsersDTOs;
+using FinalApp.ApiModels.Response.Helpers;
 using FinalApp.ApiModels.Response.Interfaces;
 using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.Domain.Models.Entities.Persons.Users;
 using FinalApp.Services.Interfaces;
+using FinalApp.Services.Mapping;
 using FinallApp.ValidationHelper;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,6 +41,27 @@ namespace FinalApp.Services.Implemintations
                     .CreateErrorResponseForModelCollection(exception);
             }
 
+        }
+
+        public async Task<IBaseResponse<Client>> RegisterClient(ClientDTO client)
+        {
+            try
+            {
+                ObjectValidator<ClientDTO>.CheckIsNotNullObject(client);
+
+                var newClient = MapperHelperForDto<Client, ClientDTO>.Map(client);
+
+                // Сохранение клиента в репозитории
+                var createdClient = await _repository.Create(newClient);
+
+                // Возвращение успешного ответа с созданным клиентом
+                return ResponseFactory<Client>.CreateSuccessResponse(createdClient);
+            }
+            catch (Exception exception)
+            {
+                // Возвращение ошибки в случае возникновения исключения
+                return ResponseFactory<Client>.CreateErrorResponse(exception);
+            }
         }
     }
 }

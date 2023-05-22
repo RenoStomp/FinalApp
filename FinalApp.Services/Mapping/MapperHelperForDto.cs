@@ -8,7 +8,7 @@ namespace FinalApp.Services.Mapping
     /// </summary>
     /// <typeparam name="T">The type of the source entity.</typeparam>
     /// <typeparam name="Tmodel">The type of the destination DTO.</typeparam>
-    public static class MapperHelper<T, Tmodel>
+    public static class MapperHelperForDto<T, Tmodel>
         where T : BaseEntity
         where Tmodel : BaseEntityDTO
     {
@@ -19,7 +19,7 @@ namespace FinalApp.Services.Mapping
         /// <returns>A collection of destination DTOs.</returns>
         public static IEnumerable<Tmodel> Map(IEnumerable<T> sourceCollection)
         {
-            var mapper = AutoMapperConfig<T, Tmodel>.Initialize();
+            var mapper = DtoAutoMapperConfig<T, Tmodel>.Initialize();
             return mapper.Map<IEnumerable<Tmodel>>(sourceCollection);
         }
         /// <summary>
@@ -29,7 +29,7 @@ namespace FinalApp.Services.Mapping
         /// <returns>The destination DTO.</returns>
         public static Tmodel Map(T source)
         {
-            var mapper = AutoMapperConfig<T, Tmodel>.Initialize();
+            var mapper = DtoAutoMapperConfig<T, Tmodel>.Initialize();
             return mapper.Map<Tmodel>(source);
         }
     }

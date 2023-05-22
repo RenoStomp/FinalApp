@@ -33,7 +33,7 @@ namespace FinalApp.Services.Implemintations
                     .ToListAsync();
 
                 ObjectValidator<List<Review>>.CheckIsNotNullObject(reviews);
-                IEnumerable<ReviewDTO> reviewsDTO = MapperHelper<Review, ReviewDTO>.Map(reviews);
+                IEnumerable<ReviewDTO> reviewsDTO = MapperHelperForDto<Review, ReviewDTO>.Map(reviews);
 
                 return ResponseFactory<ReviewDTO>.CreateSuccessResponseForModelCollection(reviewsDTO);
             }
@@ -56,7 +56,7 @@ namespace FinalApp.Services.Implemintations
                     .ToListAsync();
 
                 ObjectValidator<List<Review>>.CheckIsNotNullObject(reviews);
-                IEnumerable<ReviewDTO> reviewsDTO = MapperHelper<Review, ReviewDTO>.Map(reviews);
+                IEnumerable<ReviewDTO> reviewsDTO = MapperHelperForDto<Review, ReviewDTO>.Map(reviews);
 
                 return ResponseFactory<ReviewDTO>.CreateSuccessResponseForModelCollection(reviewsDTO);
             }
@@ -125,7 +125,7 @@ namespace FinalApp.Services.Implemintations
                 request.Review = review;
 
 
-                return ResponseFactory<ReviewDTO>.CreateSuccessResponseForOneModel(MapperHelper<Review, ReviewDTO>.Map(review));
+                return ResponseFactory<ReviewDTO>.CreateSuccessResponseForOneModel(MapperHelperForDto<Review, ReviewDTO>.Map(review));
             }
             catch (InvalidOperationException invException)
             {
@@ -181,7 +181,7 @@ namespace FinalApp.Services.Implemintations
                 await _repository.UpdateAsync(review);
 
                 ObjectValidator<Review>.CheckIsNotNullObject(review);
-                ReviewDTO reviewsDTO = MapperHelper<Review, ReviewDTO>.Map(review);
+                ReviewDTO reviewsDTO = MapperHelperForDto<Review, ReviewDTO>.Map(review);
 
                 return ResponseFactory<ReviewDTO>.CreateSuccessResponseForOneModel(reviewsDTO);
             }

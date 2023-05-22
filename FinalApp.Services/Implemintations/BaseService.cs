@@ -26,7 +26,7 @@ namespace FinalApp.Services.Implemintations
             try
             {
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
-                Tmodel entityDTO = MapperHelper<T, Tmodel>.Map(entity);
+                Tmodel entityDTO = MapperHelperForDto<T, Tmodel>.Map(entity);
 
                 await _repository.Create(entity);
 
@@ -52,7 +52,7 @@ namespace FinalApp.Services.Implemintations
                 var entities = _repository.ReadAll().ToList();
 
                 ObjectValidator<IEnumerable<T>>.CheckIsNotNullObject(entities);
-                IEnumerable<Tmodel> entitiesDTO = MapperHelper<T, Tmodel>.Map(entities);
+                IEnumerable<Tmodel> entitiesDTO = MapperHelperForDto<T, Tmodel>.Map(entities);
 
                 return ResponseFactory<Tmodel>
                     .CreateSuccessResponseForModelCollection(entitiesDTO);
@@ -76,7 +76,7 @@ namespace FinalApp.Services.Implemintations
                 var entities = await _repository.ReadAll().ToListAsync();
 
                 ObjectValidator<IEnumerable<T>>.CheckIsNotNullObject(entities);
-                IEnumerable<Tmodel> entitiesDTO = MapperHelper<T, Tmodel>.Map(entities);
+                IEnumerable<Tmodel> entitiesDTO = MapperHelperForDto<T, Tmodel>.Map(entities);
 
                 return ResponseFactory<Tmodel>
                     .CreateSuccessResponseForModelCollection(entitiesDTO);
@@ -101,7 +101,7 @@ namespace FinalApp.Services.Implemintations
                 var entity = _repository.ReadById(id);
 
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
-                Tmodel entityDTO = MapperHelper<T, Tmodel>.Map(entity);
+                Tmodel entityDTO = MapperHelperForDto<T, Tmodel>.Map(entity);
 
                 return ResponseFactory<Tmodel>
                     .CreateSuccessResponseForOneModel(entityDTO);
@@ -126,7 +126,7 @@ namespace FinalApp.Services.Implemintations
                 var entity = await _repository.ReadByIdAsync(id);
 
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
-                Tmodel entityDTO = MapperHelper<T, Tmodel>.Map(entity);
+                Tmodel entityDTO = MapperHelperForDto<T, Tmodel>.Map(entity);
 
                 return ResponseFactory<Tmodel>
                     .CreateSuccessResponseForOneModel(entityDTO);
@@ -152,7 +152,7 @@ namespace FinalApp.Services.Implemintations
                 var entity = await _repository.ReadByIdAsync(item.Id);
 
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
-                Tmodel entityDTO = MapperHelper<T, Tmodel>.Map(entity);
+                Tmodel entityDTO = MapperHelperForDto<T, Tmodel>.Map(entity);
 
                 await _repository.UpdateAsync(entity);
 
@@ -177,7 +177,7 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<T>
                     .CheckIsNotNullObject(item);
 
-                Tmodel itemDTO = MapperHelper<T, Tmodel>.Map(item);
+                Tmodel itemDTO = MapperHelperForDto<T, Tmodel>.Map(item);
 
                 await _repository
                     .DeleteAsync(item);

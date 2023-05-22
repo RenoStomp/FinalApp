@@ -32,7 +32,7 @@ namespace FinalApp.Services.Implemintations
                 var requests = TypeHelper<T>.CheckUserTypeForActiveRequest(Id, _repository).Result;
 
                 ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(requests);
-                IEnumerable<RequestDTO> requestsDTO = MapperHelper<Request, RequestDTO>.Map(requests);
+                IEnumerable<RequestDTO> requestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(requests);
 
                 return ResponseFactory<RequestDTO>
                     .CreateSuccessResponseForModelCollection(requestsDTO);
@@ -58,7 +58,7 @@ namespace FinalApp.Services.Implemintations
                 var requests = TypeHelper<T>.CheckUserTypeForClosedRequest(Id, _repository).Result;
 
                 ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(requests);
-                IEnumerable<RequestDTO> requestsDTO = MapperHelper<Request, RequestDTO>.Map(requests);
+                IEnumerable<RequestDTO> requestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(requests);
 
                 return ResponseFactory<RequestDTO>
                     .CreateSuccessResponseForModelCollection(requestsDTO);
