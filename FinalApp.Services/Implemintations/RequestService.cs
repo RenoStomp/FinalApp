@@ -2,6 +2,7 @@
 using FinalApp.ApiModels.Response.Helpers;
 using FinalApp.ApiModels.Response.Interfaces;
 using FinalApp.DAL.Repository.Interfaces;
+using FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using FinalApp.Domain.Models.Enums;
 using FinalApp.Services.Interfaces;
@@ -15,12 +16,17 @@ namespace FinalApp.Services.Implemintations
     {
         private readonly IBaseAsyncRepository<Request> _repository;
         private readonly IBaseAsyncRepository<Location> _locationRepository;
+        private readonly IBaseAsyncRepository<EcoBoxTemplate> _templateRepository;
 
 
-        public RequestService(IBaseAsyncRepository<Request> repository, IBaseAsyncRepository<Location> locationRepository)
+
+        public RequestService(IBaseAsyncRepository<Request> repository,
+            IBaseAsyncRepository<Location> locationRepository,
+            IBaseAsyncRepository<EcoBoxTemplate> templateRepository)
         {
             _repository = repository;
             _locationRepository = locationRepository;
+            _templateRepository = templateRepository;
         }
         public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetUnassignedRequests()
         {
@@ -209,6 +215,59 @@ namespace FinalApp.Services.Implemintations
 
                 request.Location = location;
                 await _repository.UpdateAsync(request);
+
+                return ResponseFactory<bool>
+                    .CreateSuccessResponseForOneModel(true);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<bool>
+                    .CreateErrorResponseForOneModel(exception);
+            }
+        }
+
+        public async Task<IBaseResponse<bool>> SetEcoBoxQuantityAndTemplate(int requestId, int quantity, int templateId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(requestId);
+                NumberValidator<int>.IsPositive(templateId);
+
+                var request = await _repository.ReadAllAsync().Result
+                    .Include(r => r.Location)
+                  .ThenInclude(location => location.EcoBoxes)
+                  .FirstOrDefaultAsync(request => request.Id == requestId);
+
+                ObjectValidator<Request>.CheckIsNotNullObject(request);
+    
+                    if (request.Location != null && request.Location.EcoBoxes != null && request.Location.EcoBoxes.Any())
+                    {
+                        var template = await _templateRepository.ReadByIdAsync(templateId);
+
+                        ObjectValidator<EcoBoxTemplate>.CheckIsNotNullObject(template);
+
+
+                        var ecoBoxesToUpdate = request.Location.EcoBoxes.Take(quantity);
+
+                            foreach (var ecoBox in ecoBoxesToUpdate)
+                            {
+                                ecoBox.Template = template;
+                            }                                            
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The Location or EcoBoxes associated with the Request are not available.");
+                    }
+
+                    await _repository.UpdateAsync(request);
+
+                ObjectValidator<Location>.CheckIsNotNullObject(location);
+
 
                 return ResponseFactory<bool>
                     .CreateSuccessResponseForOneModel(true);
