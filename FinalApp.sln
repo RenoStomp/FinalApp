@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{754018
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BL", "BL", "{10252697-CB91-49BC-A1D8-B84C214AA5EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalApp.Services", "FinalApp.Services\FinalApp.Services.csproj", "{43FF99A2-4DE0-4807-AC49-14AFB9653014}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalApp.Services", "FinalApp.Services\FinalApp.Services.csproj", "{43FF99A2-4DE0-4807-AC49-14AFB9653014}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

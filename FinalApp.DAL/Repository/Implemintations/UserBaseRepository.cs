@@ -87,7 +87,7 @@ namespace FinalApp.DAL.Repository.Implemintations
                 await _context.SaveChangesAsync();
             }
         }
-
+        //TODO: Add to Services
         public async Task SetEcoBoxQuantityAndTemplate(int requestId, int quantity, int templateId)
         {
             var request = await _context.Requests.Include(r => r.Location)
