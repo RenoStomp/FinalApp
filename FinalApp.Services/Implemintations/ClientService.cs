@@ -1,11 +1,15 @@
-﻿using FinalApp.ApiModels.DTOs.EntitiesDTOs.UsersDTOs;
+﻿using FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO;
+using FinalApp.ApiModels.DTOs.EntitiesDTOs.UsersDTOs;
 using FinalApp.ApiModels.Response.Helpers;
 using FinalApp.ApiModels.Response.Interfaces;
 using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.Domain.Models.Entities.Persons.Users;
+using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
+using FinalApp.Domain.Models.Enums;
 using FinalApp.Services.Interfaces;
 using FinalApp.Services.Mapping;
 using FinallApp.ValidationHelper;
+using Humanizer;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalApp.Services.Implemintations
@@ -23,7 +27,7 @@ namespace FinalApp.Services.Implemintations
         {
             try
             {
-                var clientsWithRequests = await _repository.ReadAllAsync().Result.Include(c => c.Rrequests).ToListAsync();
+                var clientsWithRequests = await _repository.ReadAllAsync().Result.Include(c => c.Requests).ToListAsync();
 
                 ObjectValidator<IEnumerable<Client>>.CheckIsNotNullObject(clientsWithRequests);
 
@@ -65,5 +69,34 @@ namespace FinalApp.Services.Implemintations
                 return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
             }
         }
+        public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetActiveRequests(int clientId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(clientId);
+
+                var client = await _repository.ReadByIdAsync(clientId);
+                ObjectValidator<Client>.CheckIsNotNullObject(client);
+
+                var activeRequests = client.Requests.Where(r => r.RequestStatus == Status.Active);
+
+                IEnumerable<RequestDTO> activeRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(activeRequests);
+
+                return ResponseFactory<RequestDTO>.CreateSuccessResponseForModelCollection(activeRequestsDTO);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<RequestDTO>.CreateNotFoundResponseForModelCollection(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
+            }
+        }
+        В этом методе мы сначала проверяем, что идентификатор клиента clientId положительный.Затем мы получаем клиента из репозитория по его идентификатору и проверяем, что он существует.Далее, мы выбираем только активные заявки клиента и выполняем маппинг в DTO формат. В конце возвращаем успешный ответ с кол
+
+
+
+
     }
 }

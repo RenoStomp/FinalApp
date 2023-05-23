@@ -28,7 +28,7 @@ namespace FinalApp.DAL.SqlServer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Client>()
-                 .HasMany(client => client.Rrequests)
+                 .HasMany(client => client.Requests)
                  .WithOne(request => request.Client)
                  .HasForeignKey(request => request.ClientId);
 

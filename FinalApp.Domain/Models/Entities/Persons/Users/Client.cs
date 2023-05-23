@@ -8,6 +8,6 @@ namespace FinalApp.Domain.Models.Entities.Persons.Users
     {
         public override Roles UserType { get; set; } = Roles.Client;
 
-        public ICollection<Request>? Rrequests { get; set; }
+        public ICollection<Request>? Requests { get; set; }
     }
 }
