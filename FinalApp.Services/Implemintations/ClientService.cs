@@ -93,5 +93,31 @@ namespace FinalApp.Services.Implemintations
                 return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
             }
         }
+
+        public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetClosedRequests(int clientId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(clientId);
+
+                var client = await _repository.ReadByIdAsync(clientId);
+                ObjectValidator<Client>.CheckIsNotNullObject(client);
+
+                var closedRequests = client.Requests.Where(r => r.RequestStatus == Status.Closed);
+
+                IEnumerable<RequestDTO> closedRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(closedRequests);
+
+                return ResponseFactory<RequestDTO>.CreateSuccessResponseForModelCollection(closedRequestsDTO);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<RequestDTO>.CreateNotFoundResponseForModelCollection(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
+            }
+        }
+
     }
 }

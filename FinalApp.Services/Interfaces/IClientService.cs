@@ -10,5 +10,6 @@ namespace FinalApp.Services.Interfaces
         public Task<IBaseResponse<IEnumerable<Client>>> GetClientsWithRequests();
         public Task<IBaseResponse<bool>> RegisterClient(ClientDTO client);
         public Task<IBaseResponse<IEnumerable<RequestDTO>>> GetActiveRequests(int clientId);
+        public Task<IBaseResponse<IEnumerable<RequestDTO>>> GetClosedRequests(int clientId);
     }
 }
