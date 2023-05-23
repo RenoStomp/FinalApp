@@ -1,5 +1,6 @@
 ﻿using FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO;
 using FinalApp.ApiModels.Response.Interfaces;
+using FinalApp.Domain.Models.Enums;
 
 namespace FinalApp.Services.Interfaces
 {
@@ -68,6 +69,9 @@ namespace FinalApp.Services.Interfaces
         public Task<IBaseResponse<bool>> SetEcoBoxQuantityAndTemplate(int requestId, int quantity, int templateId);
 
         public Task<IBaseResponse<bool>> CreateRequest(RequestDTO request);
+        public Task<IBaseResponse<bool>> ChangeRequestStatus(int requestId, Status newStatus);
+        public Task<IBaseResponse<IEnumerable<RequestStatusHistoryDTO>>> GetRequestStatusHistory(int requestId);
+
 
     }
 }

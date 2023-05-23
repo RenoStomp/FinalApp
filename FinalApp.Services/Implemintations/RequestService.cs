@@ -305,5 +305,28 @@ namespace FinalApp.Services.Implemintations
             }
         }
 
+        public async Task<IBaseResponse<bool>> ChangeRequestStatus(int requestId, Status newStatus)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(requestId);
+
+                var request = await _repository.ReadByIdAsync(requestId);
+                ObjectValidator<Request>.CheckIsNotNullObject(request);
+
+                request.RequestStatus = newStatus;
+                await _repository.UpdateAsync(request);
+
+                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+            }
+        }
     }
 }
