@@ -1,3 +1,4 @@
+using FinalApp.Api;
 using FinalApp.DAL.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connection = builder.Configuration.GetConnectionString("ConnectionString");
 
 builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(connection));
-
+builder.Services.InitializeRepositories();
+builder.Services.InitializeServices();
 
 // Add services to the container.
 
