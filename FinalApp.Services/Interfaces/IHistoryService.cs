@@ -3,7 +3,7 @@ using FinalApp.ApiModels.Response.Interfaces;
 
 namespace FinalApp.Services.Interfaces
 {
-    public interface IHistoryService
+    public interface IRequestHistoryService
     {
         public Task<IBaseResponse<IEnumerable<RequestStatusHistoryDTO>>> GetRequestStatusHistory(int requestId);
     }

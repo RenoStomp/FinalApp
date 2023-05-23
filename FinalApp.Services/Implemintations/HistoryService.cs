@@ -8,10 +8,10 @@ using FinallApp.ValidationHelper;
 
 namespace FinalApp.Services.Implemintations
 {
-    public class HistoryService : IHistoryService
+    public class RequestHistoryService : IRequestHistoryService
     {
         private readonly IBaseAsyncRepository<Request> _repository;
-        public HistoryService(IBaseAsyncRepository<Request> repository)
+        public RequestHistoryService(IBaseAsyncRepository<Request> repository)
         {
             _repository = repository;
         }
