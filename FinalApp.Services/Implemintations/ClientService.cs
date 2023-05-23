@@ -93,10 +93,5 @@ namespace FinalApp.Services.Implemintations
                 return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
             }
         }
-        В этом методе мы сначала проверяем, что идентификатор клиента clientId положительный.Затем мы получаем клиента из репозитория по его идентификатору и проверяем, что он существует.Далее, мы выбираем только активные заявки клиента и выполняем маппинг в DTO формат. В конце возвращаем успешный ответ с кол
-
-
-
-
     }
 }
