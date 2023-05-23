@@ -130,17 +130,17 @@ namespace FinalApp.Services.Implemintations
                 await _repository.UpdateAsync(request);
 
                 return ResponseFactory<bool>
-                    .CreateSuccessResponseForOneModel(true);
+                    .CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argException);
+                    .CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
                 return ResponseFactory<bool>
-                    .CreateErrorResponseForOneModel(exception);
+                    .CreateErrorResponse(exception);
             }
         }
         public async Task<IBaseResponse<bool>> AssignRequestToOperator(int requestId, int operatorId)
@@ -158,17 +158,17 @@ namespace FinalApp.Services.Implemintations
                 await _repository.UpdateAsync(request);
 
                 return ResponseFactory<bool>
-                    .CreateSuccessResponseForOneModel(true);
+                    .CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argException);
+                    .CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
                 return ResponseFactory<bool>
-                    .CreateErrorResponseForOneModel(exception);
+                    .CreateErrorResponse(exception);
             }
         }
 
@@ -186,17 +186,17 @@ namespace FinalApp.Services.Implemintations
                 await _repository.UpdateAsync(request);
 
                 return ResponseFactory<bool>
-                    .CreateSuccessResponseForOneModel(true);
+                    .CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argException);
+                    .CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
                 return ResponseFactory<bool>
-                    .CreateErrorResponseForOneModel(exception);
+                    .CreateErrorResponse(exception);
             }
         }
 
@@ -217,17 +217,17 @@ namespace FinalApp.Services.Implemintations
                 await _repository.UpdateAsync(request);
 
                 return ResponseFactory<bool>
-                    .CreateSuccessResponseForOneModel(true);
+                    .CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argException);
+                    .CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
                 return ResponseFactory<bool>
-                    .CreateErrorResponseForOneModel(exception);
+                    .CreateErrorResponse(exception);
             }
         }
 
@@ -263,22 +263,22 @@ namespace FinalApp.Services.Implemintations
                     await _repository.UpdateAsync(request);
 
                 return ResponseFactory<bool>
-                    .CreateSuccessResponseForOneModel(true);
+                    .CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argException);
+                    .CreateNotFoundResponse(argException);
             }
             catch (InvalidOperationException invOperationException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(invOperationException);
+                    .CreateNotFoundResponse(invOperationException);
             }
             catch (Exception exception)
             {
                 return ResponseFactory<bool>
-                    .CreateErrorResponseForOneModel(exception);
+                    .CreateErrorResponse(exception);
             }
         }
 
@@ -292,16 +292,16 @@ namespace FinalApp.Services.Implemintations
 
                 await _repository.Create(newRequest);
 
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argException);
+                    .CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
 
@@ -317,16 +317,50 @@ namespace FinalApp.Services.Implemintations
                 request.RequestStatus = newStatus;
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
+        public async Task<IBaseResponse<IEnumerable<RequestStatusHistoryDTO>>> GetRequestStatusHistory(int requestId)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(requestId);
+
+                var request = await _repository.ReadByIdAsync(requestId);
+                ObjectValidator<Request>.CheckIsNotNullObject(request);
+
+                var history = request.StatusHistory.Select(s => new RequestStatusHistoryDTO
+                {
+                    RequestId = s.RequestId,
+                    UserId = s.UserId,
+                    Timestamp = s.Timestamp,
+                    PreviousStatus = s.PreviousStatus,
+                    NewStatus = s.NewStatus
+                });
+
+                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>
+                    .CreateSuccessResponse(history);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>
+                    .CreateNotFoundResponse(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>
+                    .CreateErrorResponseForModelCollection(exception);
+            }
+        }
+
+
     }
 }

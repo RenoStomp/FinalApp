@@ -19,6 +19,7 @@ namespace FinalApp.DAL.SqlServer
         public DbSet<RecyclingPlant> RecyclingPlants { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<RequestStatusHistory> RequestStatusHistories { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options = null) : base(options)
         {
@@ -87,7 +88,10 @@ namespace FinalApp.DAL.SqlServer
                 .WithOne(template => template.SupplierCompany)
                 .HasForeignKey(template => template.SupplierId);
 
-
+            modelBuilder.Entity<RequestStatusHistory>()
+                .HasOne(rsh => rsh.Request)
+                .WithMany(r => r.StatusHistory)
+                .HasForeignKey(rsh => rsh.RequestId);
         }
     }
 }

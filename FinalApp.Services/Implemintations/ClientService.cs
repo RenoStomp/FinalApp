@@ -57,16 +57,16 @@ namespace FinalApp.Services.Implemintations
 
                 await _repository.Create(newClient);
 
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentNullException argNullException)
             {
                 return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argNullException);
+                    .CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
         public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetActiveRequests(int clientId)

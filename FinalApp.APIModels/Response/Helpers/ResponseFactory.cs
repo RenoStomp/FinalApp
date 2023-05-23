@@ -14,7 +14,7 @@ namespace FinalApp.ApiModels.Response.Helpers
                 StatusCode = 200,
             };
         }
-        public static BaseResponse<T> CreateSuccessResponseForOneModel(T model)
+        public static BaseResponse<T> CreateSuccessResponse(T model)
         {
             return new BaseResponse<T>
             {
@@ -34,7 +34,7 @@ namespace FinalApp.ApiModels.Response.Helpers
             };
         }
 
-        public static BaseResponse<T> CreateNotFoundResponseForOneModel(Exception exception)
+        public static BaseResponse<T> CreateNotFoundResponse(Exception exception)
         {
             return new BaseResponse<T>()
             {
@@ -56,7 +56,7 @@ namespace FinalApp.ApiModels.Response.Helpers
             };
         }
 
-        public static BaseResponse<T> CreateErrorResponseForOneModel(Exception exception)
+        public static BaseResponse<T> CreateErrorResponse(Exception exception)
         {
             return new BaseResponse<T>()
             {
@@ -66,7 +66,7 @@ namespace FinalApp.ApiModels.Response.Helpers
                 $"Error: {exception}",
             };
         }
-        public static BaseResponse<T> CreateInvalidOperationResponseForOneModel(Exception exception)
+        public static BaseResponse<T> CreateInvalidOperationResponse(Exception exception)
         {
             return new BaseResponse<T>()
             {

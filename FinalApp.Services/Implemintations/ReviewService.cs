@@ -84,19 +84,19 @@ namespace FinalApp.Services.Implemintations
 
                 var canCreateReview = true;
 
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(canCreateReview);
+                return ResponseFactory<bool>.CreateSuccessResponse(canCreateReview);
             }
             catch (InvalidOperationException invException)
             {
-                return ResponseFactory<bool>.CreateInvalidOperationResponseForOneModel(invException);
+                return ResponseFactory<bool>.CreateInvalidOperationResponse(invException);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
 
@@ -125,19 +125,19 @@ namespace FinalApp.Services.Implemintations
                 request.Review = review;
 
 
-                return ResponseFactory<ReviewDTO>.CreateSuccessResponseForOneModel(MapperHelperForDto<Review, ReviewDTO>.Map(review));
+                return ResponseFactory<ReviewDTO>.CreateSuccessResponse(MapperHelperForDto<Review, ReviewDTO>.Map(review));
             }
             catch (InvalidOperationException invException)
             {
-                return ResponseFactory<ReviewDTO>.CreateInvalidOperationResponseForOneModel(invException);
+                return ResponseFactory<ReviewDTO>.CreateInvalidOperationResponse(invException);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<ReviewDTO>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<ReviewDTO>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<ReviewDTO>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<ReviewDTO>.CreateErrorResponse(exception);
             }
         }
 
@@ -151,15 +151,15 @@ namespace FinalApp.Services.Implemintations
 
                 var canUpdateReview = review != null && review.Request.RequestStatus == Status.Completed;
 
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(canUpdateReview);
+                return ResponseFactory<bool>.CreateSuccessResponse(canUpdateReview);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
 
@@ -183,19 +183,19 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<Review>.CheckIsNotNullObject(review);
                 ReviewDTO reviewsDTO = MapperHelperForDto<Review, ReviewDTO>.Map(review);
 
-                return ResponseFactory<ReviewDTO>.CreateSuccessResponseForOneModel(reviewsDTO);
+                return ResponseFactory<ReviewDTO>.CreateSuccessResponse(reviewsDTO);
             }
             catch (InvalidOperationException invException)
             {
-                return ResponseFactory<ReviewDTO>.CreateInvalidOperationResponseForOneModel(invException);
+                return ResponseFactory<ReviewDTO>.CreateInvalidOperationResponse(invException);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<ReviewDTO>.CreateNotFoundResponseForOneModel(argNullException);
+                return ResponseFactory<ReviewDTO>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<ReviewDTO>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<ReviewDTO>.CreateErrorResponse(exception);
             }
         }
     }

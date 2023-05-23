@@ -80,15 +80,15 @@ namespace FinalApp.Services.Implemintations
 
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
         public async Task<IBaseResponse<bool>> MarkRequestAsCompleted(int requestId)
@@ -102,15 +102,15 @@ namespace FinalApp.Services.Implemintations
                 request.RequestStatus = Status.Completed;
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
 
@@ -127,15 +127,15 @@ namespace FinalApp.Services.Implemintations
                 request.RequestStatus = Status.Closed;
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
 

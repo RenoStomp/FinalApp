@@ -26,7 +26,8 @@ namespace FinalApp.Domain.Models.Entities.Requests.RequestsInfo
         public int? ReviewId { get; set; }
         public TechnicalTeam TechnicalTeam { get; set; }
         public int? TechTeamId { get; set; }
-       
 
+
+        public List<RequestStatusHistory> StatusHistory { get; set; }
     }
 }
