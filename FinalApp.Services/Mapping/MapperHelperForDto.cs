@@ -1,5 +1,6 @@
 ﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
 using FinalApp.Domain.Models.Common;
+using FinallApp.ValidationHelper;
 
 namespace FinalApp.Services.Mapping
 {
@@ -19,6 +20,8 @@ namespace FinalApp.Services.Mapping
         /// <returns>A collection of destination DTOs.</returns>
         public static IEnumerable<Tmodel> Map(IEnumerable<T> sourceCollection)
         {
+            
+            ObjectValidator<IEnumerable<T>>.CheckIsNotNullObject(sourceCollection);
             var mapper = DtoAutoMapperConfig<T, Tmodel>.Initialize();
             return mapper.Map<IEnumerable<Tmodel>>(sourceCollection);
         }
@@ -29,6 +32,7 @@ namespace FinalApp.Services.Mapping
         /// <returns>The destination DTO.</returns>
         public static Tmodel Map(T source)
         {
+            ObjectValidator<T>.CheckIsNotNullObject(source);
             var mapper = DtoAutoMapperConfig<T, Tmodel>.Initialize();
             return mapper.Map<Tmodel>(source);
         }
