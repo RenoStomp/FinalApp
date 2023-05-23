@@ -1,4 +1,5 @@
 using FinalApp.DAL.SqlServer;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
