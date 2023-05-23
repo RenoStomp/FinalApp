@@ -34,18 +34,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(requests);
                 IEnumerable<RequestDTO> requestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(requests);
 
-                return ResponseFactory<RequestDTO>
-                    .CreateSuccessResponseForModelCollection(requestsDTO);
+                return ResponseFactory<RequestDTO>.CreateSuccessResponseForModelCollection(requestsDTO);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateNotFoundResponseForModelCollection(argException);
+                return ResponseFactory<RequestDTO>.CreateNotFoundResponseForModelCollection(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
             }
         }
 
@@ -60,18 +57,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(requests);
                 IEnumerable<RequestDTO> requestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(requests);
 
-                return ResponseFactory<RequestDTO>
-                    .CreateSuccessResponseForModelCollection(requestsDTO);
+                return ResponseFactory<RequestDTO>.CreateSuccessResponseForModelCollection(requestsDTO);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateNotFoundResponseForModelCollection(argException);
+                return ResponseFactory<RequestDTO>.CreateNotFoundResponseForModelCollection(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
             }
         }
         public async Task<IBaseResponse<bool>> AcceptRequest(int requestId, int Id)
@@ -86,18 +80,15 @@ namespace FinalApp.Services.Implemintations
 
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>
-                    .CreateSuccessResponseForOneModel(true);
+                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>
-                    .CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
             }
         }
         public async Task<IBaseResponse<bool>> MarkRequestAsCompleted(int requestId)
@@ -111,19 +102,42 @@ namespace FinalApp.Services.Implemintations
                 request.RequestStatus = Status.Completed;
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>
-                    .CreateSuccessResponseForOneModel(true);
+                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>
-                    .CreateNotFoundResponseForOneModel(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>
-                    .CreateErrorResponseForOneModel(exception);
+                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
             }
         }
+
+        public async Task<IBaseResponse<bool>> CloseRequestByUser(int requestId, int Id)
+        {
+            try
+            {
+                NumberValidator<int>.IsPositive(requestId);
+                NumberValidator<int>.IsPositive(Id);
+
+                var request = await _repository.ReadByIdAsync(requestId);
+                ObjectValidator<Request>.CheckIsNotNullObject(request);
+
+                request.RequestStatus = Status.Closed;
+                await _repository.UpdateAsync(request);
+
+                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<bool>.CreateNotFoundResponseForOneModel(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+            }
+        }
+
     }
 }
