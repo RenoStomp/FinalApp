@@ -14,4 +14,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FinalApp.DAL\FinalApp.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

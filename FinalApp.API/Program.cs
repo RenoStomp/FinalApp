@@ -1,4 +1,11 @@
+using FinalApp.DAL.SqlServer;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connection = builder.Configuration.GetConnectionString("ConnectionString");
+
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(connection));
+
 
 // Add services to the container.
 
