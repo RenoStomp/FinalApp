@@ -281,5 +281,29 @@ namespace FinalApp.Services.Implemintations
                     .CreateErrorResponseForOneModel(exception);
             }
         }
+
+        public async Task<IBaseResponse<bool>> CreateRequest(RequestDTO request)
+        {
+            try
+            {
+                ObjectValidator<RequestDTO>.CheckIsNotNullObject(request);
+
+                var newRequest = MapperHelperForEntity<RequestDTO, Request>.Map(request);
+
+                await _repository.Create(newRequest);
+
+                return ResponseFactory<bool>.CreateSuccessResponseForOneModel(true);
+            }
+            catch (ArgumentException argException)
+            {
+                return ResponseFactory<bool>
+                    .CreateNotFoundResponseForOneModel(argException);
+            }
+            catch (Exception exception)
+            {
+                return ResponseFactory<bool>.CreateErrorResponseForOneModel(exception);
+            }
+        }
+
     }
 }

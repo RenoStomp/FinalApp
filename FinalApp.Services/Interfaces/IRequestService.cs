@@ -67,5 +67,7 @@ namespace FinalApp.Services.Interfaces
         /// <returns>An object representing the response to an operation with a Boolean value inside.</returns>
         public Task<IBaseResponse<bool>> SetEcoBoxQuantityAndTemplate(int requestId, int quantity, int templateId);
 
+        public Task<IBaseResponse<bool>> CreateRequest(RequestDTO request);
+
     }
 }
