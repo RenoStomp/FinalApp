@@ -70,7 +70,7 @@ namespace FinalApp.Services.Interfaces
 
         public Task<IBaseResponse<bool>> CreateRequest(RequestDTO request);
         public Task<IBaseResponse<bool>> ChangeRequestStatus(int requestId, Status newStatus);
-        public Task<IBaseResponse<IEnumerable<RequestStatusHistoryDTO>>> GetRequestStatusHistory(int requestId);
+     //   public Task<IBaseResponse<IEnumerable<RequestStatusHistoryDTO>>> GetRequestStatusHistory(int requestId);
 
 
     }

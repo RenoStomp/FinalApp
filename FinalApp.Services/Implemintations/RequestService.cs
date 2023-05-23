@@ -303,35 +303,7 @@ namespace FinalApp.Services.Implemintations
                 return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
-        public async Task<IBaseResponse<IEnumerable<RequestStatusHistoryDTO>>> GetRequestStatusHistory(int requestId)
-        {
-            try
-            {
-                NumberValidator<int>.IsPositive(requestId);
-
-                var request = await _repository.ReadByIdAsync(requestId);
-                ObjectValidator<Request>.CheckIsNotNullObject(request);
-
-                var history = request.StatusHistory.Select(s => new RequestStatusHistoryDTO
-                {
-                    RequestId = s.RequestId,
-                    UserId = s.UserId,
-                    Timestamp = s.Timestamp,
-                    PreviousStatus = s.PreviousStatus,
-                    NewStatus = s.NewStatus
-                });
-
-                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>.CreateSuccessResponse(history);
-            }
-            catch (ArgumentException argException)
-            {
-                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>.CreateNotFoundResponse(argException);
-            }
-            catch (Exception exception)
-            {
-                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>.CreateErrorResponse(exception);
-            }
-        }
+   
 
 
     }
