@@ -35,15 +35,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<List<Review>>.CheckIsNotNullObject(reviews);
                 IEnumerable<ReviewDTO> reviewsDTO = MapperHelperForDto<Review, ReviewDTO>.Map(reviews);
 
-                return ResponseFactory<ReviewDTO>.CreateSuccessResponseForModelCollection(reviewsDTO);
+                return ResponseFactory<IEnumerable<ReviewDTO>>.CreateSuccessResponse(reviewsDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<ReviewDTO>.CreateNotFoundResponseForModelCollection(argNullException);
+                return ResponseFactory<IEnumerable<ReviewDTO>>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception excpetion)
             {
-                return ResponseFactory<ReviewDTO>.CreateErrorResponseForModelCollection(excpetion);
+                return ResponseFactory<IEnumerable<ReviewDTO>>.CreateErrorResponse(excpetion);
             }
         }
 
@@ -58,15 +58,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<List<Review>>.CheckIsNotNullObject(reviews);
                 IEnumerable<ReviewDTO> reviewsDTO = MapperHelperForDto<Review, ReviewDTO>.Map(reviews);
 
-                return ResponseFactory<ReviewDTO>.CreateSuccessResponseForModelCollection(reviewsDTO);
+                return ResponseFactory<IEnumerable<ReviewDTO>>.CreateSuccessResponse(reviewsDTO);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<ReviewDTO>.CreateNotFoundResponseForModelCollection(argNullException);
+                return ResponseFactory<IEnumerable<ReviewDTO>>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<ReviewDTO>.CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<ReviewDTO>>.CreateErrorResponse(exception);
             }
         }
 

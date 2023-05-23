@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FinalApp.Domain.Models.Common;
+using FinalApp.Domain.Models.Enums;
 
 namespace FinalApp.Domain.Models.Entities.Requests.RequestsInfo
 {
-    internal class RequestStatusHistory
+    public class RequestStatusHistory : BaseEntity
     {
+        public int RequestId { get; set; }
+        public int UserId { get; set; }
+        public DateTime Timestamp { get; set; }
+        public Status PreviousStatus { get; set; }
+        public Status NewStatus { get; set; }
+
+        public Request Request { get; set; }
     }
 }

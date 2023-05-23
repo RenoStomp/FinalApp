@@ -31,18 +31,15 @@ namespace FinalApp.Services.Implemintations
 
                 ObjectValidator<IEnumerable<Client>>.CheckIsNotNullObject(clientsWithRequests);
 
-                return ResponseFactory<Client>
-                    .CreateSuccessResponseForModelCollection(clientsWithRequests);
+                return ResponseFactory<IEnumerable<Client>>.CreateSuccessResponse(clientsWithRequests);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Client>
-                    .CreateNotFoundResponseForModelCollection(argNullException);
+                return ResponseFactory<IEnumerable<Client>>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Client>
-                    .CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<Client>>.CreateErrorResponse(exception);
             }
 
         }
@@ -82,15 +79,15 @@ namespace FinalApp.Services.Implemintations
 
                 IEnumerable<RequestDTO> activeRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(activeRequests);
 
-                return ResponseFactory<RequestDTO>.CreateSuccessResponseForModelCollection(activeRequestsDTO);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateSuccessResponse(activeRequestsDTO);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<RequestDTO>.CreateNotFoundResponseForModelCollection(argException);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateErrorResponse(exception);
             }
         }
 
@@ -107,15 +104,15 @@ namespace FinalApp.Services.Implemintations
 
                 IEnumerable<RequestDTO> closedRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(closedRequests);
 
-                return ResponseFactory<RequestDTO>.CreateSuccessResponseForModelCollection(closedRequestsDTO);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateSuccessResponse(closedRequestsDTO);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<RequestDTO>.CreateNotFoundResponseForModelCollection(argException);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateErrorResponse(exception);
             }
         }
 

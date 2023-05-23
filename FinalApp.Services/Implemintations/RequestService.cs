@@ -42,18 +42,15 @@ namespace FinalApp.Services.Implemintations
 
                 IEnumerable<RequestDTO> unassignedRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(unassignedRequests);
 
-                return ResponseFactory<RequestDTO>
-                    .CreateSuccessResponseForModelCollection(unassignedRequestsDTO);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateSuccessResponse(unassignedRequestsDTO);
             }           
             catch (ArgumentException argException)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateNotFoundResponseForModelCollection(argException);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateErrorResponse(exception);
             }
         }
         public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetClosedRequestsByOperatorId(int operatorId)
@@ -71,18 +68,15 @@ namespace FinalApp.Services.Implemintations
 
                 IEnumerable<RequestDTO> closedRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(closedRequests);
 
-                return ResponseFactory<RequestDTO>
-                    .CreateSuccessResponseForModelCollection(closedRequestsDTO);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateSuccessResponse(closedRequestsDTO);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateNotFoundResponseForModelCollection(argException);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateErrorResponse(exception);
             }
         }
 
@@ -101,18 +95,15 @@ namespace FinalApp.Services.Implemintations
 
                 IEnumerable<RequestDTO> activeRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(activeRequests);
 
-                return ResponseFactory<RequestDTO>
-                    .CreateSuccessResponseForModelCollection(activeRequestsDTO);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateSuccessResponse(activeRequestsDTO);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateNotFoundResponseForModelCollection(argException);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<RequestDTO>
-                    .CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateErrorResponse(exception);
             }
         }
 
@@ -129,18 +120,15 @@ namespace FinalApp.Services.Implemintations
                 request.TechTeamId = teamId;
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>
-                    .CreateSuccessResponse(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>
-                    .CreateNotFoundResponse(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>
-                    .CreateErrorResponse(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
         public async Task<IBaseResponse<bool>> AssignRequestToOperator(int requestId, int operatorId)
@@ -157,18 +145,15 @@ namespace FinalApp.Services.Implemintations
                 request.OperatorId = operatorId;
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>
-                    .CreateSuccessResponse(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>
-                    .CreateNotFoundResponse(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>
-                    .CreateErrorResponse(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
 
@@ -185,18 +170,15 @@ namespace FinalApp.Services.Implemintations
                 request.RequestStatus = Status.Completed;
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>
-                    .CreateSuccessResponse(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>
-                    .CreateNotFoundResponse(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>
-                    .CreateErrorResponse(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
 
@@ -216,18 +198,15 @@ namespace FinalApp.Services.Implemintations
                 request.Location = location;
                 await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>
-                    .CreateSuccessResponse(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>
-                    .CreateNotFoundResponse(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>
-                    .CreateErrorResponse(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
 
@@ -262,23 +241,19 @@ namespace FinalApp.Services.Implemintations
 
                     await _repository.UpdateAsync(request);
 
-                return ResponseFactory<bool>
-                    .CreateSuccessResponse(true);
+                return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<bool>
-                    .CreateNotFoundResponse(argException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(argException);
             }
             catch (InvalidOperationException invOperationException)
             {
-                return ResponseFactory<bool>
-                    .CreateNotFoundResponse(invOperationException);
+                return ResponseFactory<bool>.CreateNotFoundResponse(invOperationException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<bool>
-                    .CreateErrorResponse(exception);
+                return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
 
@@ -346,18 +321,15 @@ namespace FinalApp.Services.Implemintations
                     NewStatus = s.NewStatus
                 });
 
-                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>
-                    .CreateSuccessResponse(history);
+                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>.CreateSuccessResponse(history);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>
-                    .CreateNotFoundResponse(argException);
+                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>
-                    .CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<RequestStatusHistoryDTO>>.CreateErrorResponse(exception);
             }
         }
 

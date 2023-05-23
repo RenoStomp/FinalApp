@@ -23,16 +23,6 @@ namespace FinalApp.ApiModels.Response.Helpers
                 StatusCode = 200,
             };
         }
-        public static BaseResponse<IEnumerable<T>> CreateNotFoundResponseForModelCollection(Exception exception)
-        {
-            return new BaseResponse<IEnumerable<T>>()
-            {        
-                StatusCode = 0,
-                IsSuccess = false,
-                Message = "no records found in the database.\n\r" +
-                    $"Error: {exception}",
-            };
-        }
 
         public static BaseResponse<T> CreateNotFoundResponse(Exception exception)
         {
@@ -42,17 +32,6 @@ namespace FinalApp.ApiModels.Response.Helpers
                 IsSuccess = false,
                 Message = "no records found in the database.\n\r" +
                     $"Error: {exception}",
-            };
-        }
-
-        public static BaseResponse<IEnumerable<T>> CreateErrorResponseForModelCollection(Exception exception)
-        {
-            return new BaseResponse<IEnumerable<T>>()
-            {             
-                StatusCode = 500,
-                IsSuccess = false,
-                Message = "internal server error.\n\r" +
-                $"Error: {exception}",
             };
         }
 

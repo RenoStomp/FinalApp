@@ -34,15 +34,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(requests);
                 IEnumerable<RequestDTO> requestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(requests);
 
-                return ResponseFactory<RequestDTO>.CreateSuccessResponseForModelCollection(requestsDTO);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateSuccessResponse(requestsDTO);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<RequestDTO>.CreateNotFoundResponseForModelCollection(argException);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateErrorResponse(exception);
             }
         }
 
@@ -57,15 +57,15 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<IEnumerable<Request>>.CheckIsNotNullObject(requests);
                 IEnumerable<RequestDTO> requestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(requests);
 
-                return ResponseFactory<RequestDTO>.CreateSuccessResponseForModelCollection(requestsDTO);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateSuccessResponse(requestsDTO);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<RequestDTO>.CreateNotFoundResponseForModelCollection(argException);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<RequestDTO>.CreateErrorResponseForModelCollection(exception);
+                return ResponseFactory<IEnumerable<RequestDTO>>.CreateErrorResponse(exception);
             }
         }
         public async Task<IBaseResponse<bool>> AcceptRequest(int requestId, int Id)
