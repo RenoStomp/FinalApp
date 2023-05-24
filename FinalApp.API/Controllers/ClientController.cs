@@ -47,7 +47,7 @@ namespace FinalApp.Api.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            await _service.DeleteAsync(id);
+            await _service.DeleteByIdAsync(id);
         }
 
     }
