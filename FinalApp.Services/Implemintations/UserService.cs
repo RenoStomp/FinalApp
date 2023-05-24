@@ -9,7 +9,6 @@ using FinalApp.Services.Helpers;
 using FinalApp.Services.Interfaces;
 using FinalApp.Services.Mapping;
 using FinallApp.ValidationHelper;
-using Microsoft.EntityFrameworkCore;
 
 namespace FinalApp.Services.Implemintations
 {

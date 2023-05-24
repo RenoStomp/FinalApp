@@ -128,12 +128,12 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<Tmodel>.CheckIsNotNullObject(entityDTO);
                 T entity = MapperHelperForEntity<Tmodel, T>.Map(entityDTO);
 
-                var updatedEntity = await _repository.ReadByIdAsync(entity.Id);
+               // var updatedEntity = await _repository.ReadByIdAsync(entity.Id);
+              //  ObjectValidator<T>.CheckIsNotNullObject(updatedEntity);
 
-                ObjectValidator<T>.CheckIsNotNullObject(updatedEntity);
-                await _repository.UpdateAsync(updatedEntity);
+                await _repository.UpdateAsync(entity);
 
-                return ResponseFactory<T>.CreateSuccessResponse(updatedEntity);
+                return ResponseFactory<T>.CreateSuccessResponse(entity);
             }
             catch (ArgumentNullException argNullException)
             {
