@@ -21,92 +21,86 @@ namespace FinalApp.Services.Implemintations
             _repository = repository;
         }
 
-        public async Task<IBaseResponse<Tmodel>> Create(T entity)
+        public async Task<IBaseResponse<T>> CreateAsync(Tmodel entityDTO)
         {
             try
             {
-                ObjectValidator<T>.CheckIsNotNullObject(entity);
-                Tmodel entityDTO = MapperHelperForDto<T, Tmodel>.Map(entity);
+                ObjectValidator<Tmodel>.CheckIsNotNullObject(entityDTO);
+                T entity = MapperHelperForEntity<Tmodel, T>.Map(entityDTO);
 
                 await _repository.Create(entity);
 
-                return ResponseFactory<Tmodel>.CreateSuccessResponse(entityDTO);
+                return ResponseFactory<T>.CreateSuccessResponse(entity);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponse(argNullException);
+                return ResponseFactory<T>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponse(exception);
+                return ResponseFactory<T>.CreateErrorResponse(exception);
             }
         }
 
-        public IBaseResponse<IEnumerable<Tmodel>> ReadAll()
+        public IBaseResponse<IEnumerable<T>> ReadAll()
         {
             try
             {
                 var entities = _repository.ReadAll().ToList();
-
                 ObjectValidator<IEnumerable<T>>.CheckIsNotNullObject(entities);
-                IEnumerable<Tmodel> entitiesDTO = MapperHelperForDto<T, Tmodel>.Map(entities);
 
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateSuccessResponse(entitiesDTO);
+                return ResponseFactory<IEnumerable<T>>.CreateSuccessResponse(entities);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateNotFoundResponse(argNullException);
+                return ResponseFactory<IEnumerable<T>>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateErrorResponse(exception);
+                return ResponseFactory<IEnumerable<T>>.CreateErrorResponse(exception);
             }
         }
 
-        public async Task<IBaseResponse<IEnumerable<Tmodel>>> ReadAllAsync()
+        public async Task<IBaseResponse<IEnumerable<T>>> ReadAllAsync()
         {
             try
             {
                 var entities = await _repository.ReadAll().ToListAsync();
-
                 ObjectValidator<IEnumerable<T>>.CheckIsNotNullObject(entities);
-                IEnumerable<Tmodel> entitiesDTO = MapperHelperForDto<T, Tmodel>.Map(entities);
 
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateSuccessResponse(entitiesDTO);
+                return ResponseFactory<IEnumerable<T>>.CreateSuccessResponse(entities);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateNotFoundResponse(argNullException);
+                return ResponseFactory<IEnumerable<T>>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<IEnumerable<Tmodel>>.CreateErrorResponse(exception);
+                return ResponseFactory<IEnumerable<T>>.CreateErrorResponse(exception);
             }
         }
 
-        public IBaseResponse<Tmodel> ReadById(int id)
+        public IBaseResponse<T> ReadById(int id)
         {
             try
             {
                 NumberValidator<int>.IsPositive(id);
                 var entity = _repository.ReadById(id);
-
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
-                Tmodel entityDTO = MapperHelperForDto<T, Tmodel>.Map(entity);
 
-                return ResponseFactory<Tmodel>.CreateSuccessResponse(entityDTO);
+                return ResponseFactory<T>.CreateSuccessResponse(entity);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponse(argNullException);
+                return ResponseFactory<T>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponse(exception);
+                return ResponseFactory<T>.CreateErrorResponse(exception);
             }
         }
 
-        public async Task<IBaseResponse<Tmodel>> ReadByIdAsync(int id)
+        public async Task<IBaseResponse<T>> ReadByIdAsync(int id)
         {
             try
             {
@@ -114,53 +108,50 @@ namespace FinalApp.Services.Implemintations
                 var entity = await _repository.ReadByIdAsync(id);
 
                 ObjectValidator<T>.CheckIsNotNullObject(entity);
-                Tmodel entityDTO = MapperHelperForDto<T, Tmodel>.Map(entity);
 
-                return ResponseFactory<Tmodel>.CreateSuccessResponse(entityDTO);
+                return ResponseFactory<T>.CreateSuccessResponse(entity);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponse(argNullException);
+                return ResponseFactory<T>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponse(exception);
+                return ResponseFactory<T>.CreateErrorResponse(exception);
             }
         }
 
-        public async Task<IBaseResponse<Tmodel>> UpdateAsync(T item)
+        public async Task<IBaseResponse<T>> UpdateAsync(Tmodel entityDTO)
         {
             try
             {
-                ObjectValidator<T>.CheckIsNotNullObject(item);
+                ObjectValidator<Tmodel>.CheckIsNotNullObject(entityDTO);
+                T entity = MapperHelperForEntity<Tmodel, T>.Map(entityDTO);
 
-                var entity = await _repository.ReadByIdAsync(item.Id);
+                var updatedEntity = await _repository.ReadByIdAsync(entity.Id);
 
-                ObjectValidator<T>.CheckIsNotNullObject(entity);
-                Tmodel entityDTO = MapperHelperForDto<T, Tmodel>.Map(entity);
+                ObjectValidator<T>.CheckIsNotNullObject(updatedEntity);
+                await _repository.UpdateAsync(updatedEntity);
 
-                await _repository.UpdateAsync(entity);
-
-                return ResponseFactory<Tmodel>.CreateSuccessResponse(entityDTO);
+                return ResponseFactory<T>.CreateSuccessResponse(updatedEntity);
             }
             catch (ArgumentNullException argNullException)
             {
-                return ResponseFactory<Tmodel>.CreateNotFoundResponse(argNullException);
+                return ResponseFactory<T>.CreateNotFoundResponse(argNullException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<Tmodel>.CreateErrorResponse(exception);
+                return ResponseFactory<T>.CreateErrorResponse(exception);
             }
         }
-        public async Task<IBaseResponse<bool>> DeleteAsync(T item)
+        public async Task<IBaseResponse<bool>> DeleteAsync(Tmodel entityDTO)
         {
             try
             {
-                ObjectValidator<T>.CheckIsNotNullObject(item);
+                ObjectValidator<Tmodel>.CheckIsNotNullObject(entityDTO);
 
-                Tmodel itemDTO = MapperHelperForDto<T, Tmodel>.Map(item);
-
-                await _repository.DeleteAsync(item);
+                T entity = MapperHelperForEntity<Tmodel, T>.Map(entityDTO);
+                await _repository.DeleteAsync(entity);
 
                 return ResponseFactory<bool>.CreateSuccessResponse(true);
             }
@@ -179,7 +170,6 @@ namespace FinalApp.Services.Implemintations
             try
             {
                 NumberValidator<int>.IsPositive(id);
-
                 await _repository.DeleteByIdAsync(id);
 
                 return ResponseFactory<bool>.CreateSuccessResponse(true);

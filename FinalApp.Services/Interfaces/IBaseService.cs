@@ -16,49 +16,49 @@ namespace FinalApp.Services.Interfaces
         /// <summary>
         /// Creates a new entity.
         /// </summary>
-        /// <param name="entity">The entity to create.</param>
+        /// <param name="entityDTO">The entity to create.</param>
         /// <returns>An asynchronous operation that returns the created entity.</returns>
-        public Task<IBaseResponse<Tmodel>> Create(T entity);
+        public Task<IBaseResponse<T>> CreateAsync(Tmodel entityDTO);
 
         /// <summary>
         /// Retrieves all entities.
         /// </summary>
         /// <returns>A response containing a collection of entities.</returns>
-        public IBaseResponse<IEnumerable<Tmodel>> ReadAll();
+        public IBaseResponse<IEnumerable<T>> ReadAll();
 
         /// <summary>
         /// Retrieves all entities asynchronously.
         /// </summary>
         /// <returns>An asynchronous operation that returns a response containing a collection of entities.</returns>
-        public Task<IBaseResponse<IEnumerable<Tmodel>>> ReadAllAsync();
+        public Task<IBaseResponse<IEnumerable<T>>> ReadAllAsync();
 
         /// <summary>
         /// Retrieves an entity by its ID.
         /// </summary>
         /// <param name="id">The ID of the entity to retrieve.</param>
         /// <returns>A response containing the retrieved entity.</returns>
-        public IBaseResponse<Tmodel> ReadById(int id);
+        public IBaseResponse<T> ReadById(int id);
 
         /// <summary>
         /// Retrieves an entity by its ID asynchronously.
         /// </summary>
         /// <param name="id">The ID of the entity to retrieve.</param>
         /// <returns>An asynchronous operation that returns a response containing the retrieved entity.</returns>
-        public Task<IBaseResponse<Tmodel>> ReadByIdAsync(int id);
+        public Task<IBaseResponse<T>> ReadByIdAsync(int id);
 
         /// <summary>
         /// Updates an existing entity asynchronously.
         /// </summary>
-        /// <param name="item">The updated entity.</param>
+        /// <param name="entityDTO">The updated entity.</param>
         /// <returns>An asynchronous operation that returns the updated entity.</returns>
-        public Task<IBaseResponse<Tmodel>> UpdateAsync(T item);
+        public Task<IBaseResponse<T>> UpdateAsync(Tmodel entityDTO);
 
         /// <summary>
         /// Deletes an entity asynchronously.
         /// </summary>
-        /// <param name="item">The entity to delete.</param>
+        /// <param name="entityDTO">The entity to delete.</param>
         /// <returns>An asynchronous operation that returns a response indicating the success of the deletion.</returns>
-        public Task<IBaseResponse<bool>> DeleteAsync(T item);
+        public Task<IBaseResponse<bool>> DeleteAsync(Tmodel entityDTO);
 
         /// <summary>
         /// Deletes an entity by its ID asynchronously.
