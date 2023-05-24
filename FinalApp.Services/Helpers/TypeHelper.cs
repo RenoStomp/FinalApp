@@ -1,5 +1,5 @@
 ﻿using FinalApp.DAL.Repository.Interfaces;
-using FinalApp.Domain.Models.Common;
+using FinalApp.Domain.Models.Abstractions.BaseEntities;
 using FinalApp.Domain.Models.Entities.Persons.Users;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using FinalApp.Domain.Models.Enums;

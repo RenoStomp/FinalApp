@@ -25,6 +25,12 @@ namespace FinalApp.Api.Controllers
             var response = _service.ReadAll();
             return Results.Ok(response.Data);
         }
+        //[HttpGet("Requests")]
+        //public IResult GetRequests()
+        //{
+
+        //}
+
         [HttpGet("{id}")]
         public IResult Get(int id)
         {

@@ -1,4 +1,4 @@
-﻿namespace FinalApp.Domain.Models.Common.BaseUsersInfo
+﻿namespace FinalApp.Domain.Models.Abstractions.BaseUsers
 {
     public abstract class AccountHolder : BasePerson
     {

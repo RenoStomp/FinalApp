@@ -1,6 +1,6 @@
 ﻿using FinalApp.Domain.Models.Enums;
 
-namespace FinalApp.Domain.Models.Common.BaseUsersInfo
+namespace FinalApp.Domain.Models.Abstractions.BaseUsers
 {
     public abstract class BaseUser : AccountHolder
     {

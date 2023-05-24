@@ -1,5 +1,6 @@
-﻿
-namespace FinalApp.Domain.Models.Common.BaseRequests
+﻿using FinalApp.Domain.Models.Abstractions.BaseEntities;
+
+namespace FinalApp.Domain.Models.Abstractions.BaseRequests
 {
     public abstract class BaseLocation : BaseEntity
     {
@@ -12,13 +13,13 @@ namespace FinalApp.Domain.Models.Common.BaseRequests
         {
             get
             {
-                return (
+                return 
                     $"City: {City}\n" +
                     $"Street: {Street}\n" +
                     $"HouseNumber: {HouseNumber}\n" +
                     $"ApartmentNumber: {ApartmentNumber}\n" +
                     $"ZipCode {ZipCode}"
-                    );
+                    ;
             }
         }
     }

@@ -2,7 +2,7 @@
 using FinalApp.ApiModels.Response.Helpers;
 using FinalApp.ApiModels.Response.Interfaces;
 using FinalApp.DAL.Repository.Interfaces;
-using FinalApp.Domain.Models.Common;
+using FinalApp.Domain.Models.Abstractions.BaseEntities;
 using FinalApp.Services.Interfaces;
 using FinalApp.Services.Mapping;
 using FinallApp.ValidationHelper;

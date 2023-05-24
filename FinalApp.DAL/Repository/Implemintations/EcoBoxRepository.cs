@@ -1,7 +1,7 @@
 ﻿using FinalApp.DAL.Repository.Implemintations;
 using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.DAL.SqlServer;
-using FinalApp.Domain.Models.Common.BaseRequests;
+using FinalApp.Domain.Models.Abstractions.BaseRequests;
 using FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo;
 using Microsoft.EntityFrameworkCore;
 

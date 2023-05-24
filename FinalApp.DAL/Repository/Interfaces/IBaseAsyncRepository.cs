@@ -1,4 +1,4 @@
-﻿using FinalApp.Domain.Models.Common;
+﻿using FinalApp.Domain.Models.Abstractions.BaseEntities;
 
 namespace FinalApp.DAL.Repository.Interfaces
 {

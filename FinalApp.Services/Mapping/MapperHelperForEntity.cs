@@ -1,5 +1,5 @@
 ﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
-using FinalApp.Domain.Models.Common;
+using FinalApp.Domain.Models.Abstractions.BaseEntities;
 using FinallApp.ValidationHelper;
 
 namespace FinalApp.Services.Mapping

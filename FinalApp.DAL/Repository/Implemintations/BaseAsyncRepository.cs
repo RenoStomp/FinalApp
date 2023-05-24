@@ -1,6 +1,6 @@
 ﻿using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.DAL.SqlServer;
-using FinalApp.Domain.Models.Common;
+using FinalApp.Domain.Models.Abstractions.BaseEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalApp.DAL.Repository.Implemintations

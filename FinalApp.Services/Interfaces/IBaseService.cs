@@ -1,6 +1,6 @@
 ﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
 using FinalApp.ApiModels.Response.Interfaces;
-using FinalApp.Domain.Models.Common;
+using FinalApp.Domain.Models.Abstractions.BaseEntities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

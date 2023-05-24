@@ -1,4 +1,4 @@
-﻿using FinalApp.Domain.Models.Common.BaseRequests;
+﻿using FinalApp.Domain.Models.Abstractions.BaseRequests;
 
 namespace FinalApp.Domain.Models.Entities.Requests.RequestsInfo
 {

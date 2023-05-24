@@ -1,4 +1,4 @@
-﻿using FinalApp.Domain.Models.Common.BaseRequests;
+﻿using FinalApp.Domain.Models.Abstractions.BaseRequests;
 using FinalApp.Domain.Models.Entities.Persons.Users;
 using FinalApp.Domain.Models.Enums;
 
