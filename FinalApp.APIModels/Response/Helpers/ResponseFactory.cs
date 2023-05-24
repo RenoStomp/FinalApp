@@ -5,15 +5,6 @@ namespace FinalApp.ApiModels.Response.Helpers
 {
     public static class ResponseFactory<T>
     {
-        public static BaseResponse<IEnumerable<T>> CreateSuccessResponseForModelCollection(IEnumerable<T> models)
-        {
-            return new BaseResponse<IEnumerable<T>>()
-            {
-                IsSuccess = true,
-                Data = models,
-                StatusCode = 200,
-            };
-        }
         public static BaseResponse<T> CreateSuccessResponse(T model)
         {
             return new BaseResponse<T>
@@ -28,7 +19,7 @@ namespace FinalApp.ApiModels.Response.Helpers
         {
             return new BaseResponse<T>()
             {
-                StatusCode = 0,
+                StatusCode = 404,
                 IsSuccess = false,
                 Message = "no records found in the database.\n\r" +
                     $"Error: {exception}",

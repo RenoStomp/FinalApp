@@ -1,5 +1,4 @@
 ﻿using FinalApp.ApiModels.DTOs.CommonDTOs.BaseDTOs;
-using FinalApp.Domain.Models.Common.BaseRequests;
 
 namespace FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO
 {
