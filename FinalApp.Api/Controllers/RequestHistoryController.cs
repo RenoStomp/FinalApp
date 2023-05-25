@@ -13,6 +13,7 @@ namespace FinalApp.Api.Controllers
         {
             _historyService = historyService;
         }
+
         [HttpGet("GetStatus/{requestId}")]
         public async Task<IActionResult> GetStatus(int requestId)
         {
