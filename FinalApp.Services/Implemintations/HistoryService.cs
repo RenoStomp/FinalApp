@@ -17,7 +17,7 @@ namespace FinalApp.Services.Implemintations
         }
 
 
-        public async Task<IBaseResponse<IEnumerable<RequestStatusHistoryDTO>>> GetRequestStatusHistory(int requestId)
+        public async Task<IBaseResponse<IEnumerable<RequestStatusHistoryDTO>>> GetRequestHistoryStatus(int requestId)
         {
             try
             {
