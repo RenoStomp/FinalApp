@@ -33,10 +33,6 @@ namespace FinalApp.DAL.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -46,10 +42,6 @@ namespace FinalApp.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -76,10 +68,6 @@ namespace FinalApp.DAL.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -89,10 +77,6 @@ namespace FinalApp.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -108,7 +92,7 @@ namespace FinalApp.DAL.Migrations
                     b.ToTable("SupportOperators");
                 });
 
-            modelBuilder.Entity("FinalApp.Domain.Models.Entities.Persons.Users.TechnicalTeam", b =>
+            modelBuilder.Entity("FinalApp.Domain.Models.Entities.Persons.Users.TechTeam", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -119,10 +103,6 @@ namespace FinalApp.DAL.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -132,10 +112,6 @@ namespace FinalApp.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -184,7 +160,15 @@ namespace FinalApp.DAL.Migrations
                     b.Property<DateTime>("HireTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -203,7 +187,7 @@ namespace FinalApp.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int?>("TechTeamId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -435,7 +419,17 @@ namespace FinalApp.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<bool>("StatusClientInfo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("StatusTeamInfo")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("TechTeamId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -452,11 +446,40 @@ namespace FinalApp.DAL.Migrations
                     b.HasIndex("ReviewId")
                         .IsUnique();
 
-                    b.HasIndex("TeamId")
-                        .IsUnique()
-                        .HasFilter("[TeamId] IS NOT NULL");
+                    b.HasIndex("TechTeamId")
+                        .IsUnique();
 
                     b.ToTable("Requests");
+                });
+
+            modelBuilder.Entity("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.RequestStatusHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("NewStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PreviousStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("RequestStatusHistories");
                 });
 
             modelBuilder.Entity("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.Review", b =>
@@ -483,7 +506,7 @@ namespace FinalApp.DAL.Migrations
 
             modelBuilder.Entity("FinalApp.Domain.Models.Entities.Persons.WorkTeams.TechnicalTeamWorker", b =>
                 {
-                    b.HasOne("FinalApp.Domain.Models.Entities.Persons.Users.TechnicalTeam", "TechnicalTeam")
+                    b.HasOne("FinalApp.Domain.Models.Entities.Persons.Users.TechTeam", "TechnicalTeam")
                         .WithMany("Workers")
                         .HasForeignKey("TechnicalTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -531,7 +554,7 @@ namespace FinalApp.DAL.Migrations
             modelBuilder.Entity("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.Request", b =>
                 {
                     b.HasOne("FinalApp.Domain.Models.Entities.Persons.Users.Client", "Client")
-                        .WithMany("Rrequests")
+                        .WithMany("Requests")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -556,9 +579,11 @@ namespace FinalApp.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FinalApp.Domain.Models.Entities.Persons.Users.TechnicalTeam", "TechnicalTeam")
+                    b.HasOne("FinalApp.Domain.Models.Entities.Persons.Users.TechTeam", "TechnicalTeam")
                         .WithOne("Request")
-                        .HasForeignKey("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.Request", "TeamId");
+                        .HasForeignKey("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.Request", "TechTeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Client");
 
@@ -573,9 +598,20 @@ namespace FinalApp.DAL.Migrations
                     b.Navigation("TechnicalTeam");
                 });
 
+            modelBuilder.Entity("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.RequestStatusHistory", b =>
+                {
+                    b.HasOne("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.Request", "Request")
+                        .WithMany("StatusHistory")
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Request");
+                });
+
             modelBuilder.Entity("FinalApp.Domain.Models.Entities.Persons.Users.Client", b =>
                 {
-                    b.Navigation("Rrequests");
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("FinalApp.Domain.Models.Entities.Persons.Users.SupportOperator", b =>
@@ -583,7 +619,7 @@ namespace FinalApp.DAL.Migrations
                     b.Navigation("Requests");
                 });
 
-            modelBuilder.Entity("FinalApp.Domain.Models.Entities.Persons.Users.TechnicalTeam", b =>
+            modelBuilder.Entity("FinalApp.Domain.Models.Entities.Persons.Users.TechTeam", b =>
                 {
                     b.Navigation("Request");
 
@@ -615,6 +651,11 @@ namespace FinalApp.DAL.Migrations
             modelBuilder.Entity("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.RecyclingPlant", b =>
                 {
                     b.Navigation("Requests");
+                });
+
+            modelBuilder.Entity("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.Request", b =>
+                {
+                    b.Navigation("StatusHistory");
                 });
 
             modelBuilder.Entity("FinalApp.Domain.Models.Entities.Requests.RequestsInfo.Review", b =>

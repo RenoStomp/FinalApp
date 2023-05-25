@@ -2,11 +2,12 @@
 using FinalApp.Domain.Models.Entities.Persons.WorkTeams;
 using FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalApp.DAL.SqlServer
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public DbSet<Client> Clients { get; set; }
         public DbSet<SupportOperator> SupportOperators { get; set; }

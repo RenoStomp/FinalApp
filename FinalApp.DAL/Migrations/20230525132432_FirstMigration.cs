@@ -18,8 +18,6 @@ namespace FinalApp.DAL.Migrations
                     UserType = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -110,8 +108,6 @@ namespace FinalApp.DAL.Migrations
                     UserType = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -131,8 +127,6 @@ namespace FinalApp.DAL.Migrations
                     WorkerId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -151,9 +145,11 @@ namespace FinalApp.DAL.Migrations
                     Salary = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HireTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Position = table.Column<int>(type: "int", nullable: false),
-                    TeamId = table.Column<int>(type: "int", nullable: true),
+                    TechTeamId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -193,15 +189,18 @@ namespace FinalApp.DAL.Migrations
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BoxQuantity = table.Column<int>(type: "int", nullable: false),
                     CompletedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    WorkType = table.Column<int>(type: "int", nullable: false),
                     RequestType = table.Column<int>(type: "int", nullable: false),
                     RequestStatus = table.Column<int>(type: "int", nullable: false),
-                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: true),
                     PlantId = table.Column<int>(type: "int", nullable: true),
-                    LocationId = table.Column<int>(type: "int", nullable: false),
+                    LocationId = table.Column<int>(type: "int", nullable: true),
                     OperatorId = table.Column<int>(type: "int", nullable: true),
-                    ReviewId = table.Column<int>(type: "int", nullable: false),
-                    TeamId = table.Column<int>(type: "int", nullable: true),
-                    RequestCreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ReviewId = table.Column<int>(type: "int", nullable: true),
+                    TechTeamId = table.Column<int>(type: "int", nullable: true),
+                    RequestCreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StatusClientInfo = table.Column<bool>(type: "bit", nullable: false),
+                    StatusTeamInfo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,10 +234,11 @@ namespace FinalApp.DAL.Migrations
                         principalTable: "SupportOperators",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Requests_TechnicalTeams_TeamId",
-                        column: x => x.TeamId,
+                        name: "FK_Requests_TechnicalTeams_TechTeamId",
+                        column: x => x.TechTeamId,
                         principalTable: "TechnicalTeams",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -293,6 +293,29 @@ namespace FinalApp.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "RequestStatusHistories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RequestId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PreviousStatus = table.Column<int>(type: "int", nullable: false),
+                    NewStatus = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequestStatusHistories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RequestStatusHistories_Requests_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "Requests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_EcoBoxes_LocationId",
                 table: "EcoBoxes",
@@ -336,11 +359,15 @@ namespace FinalApp.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_TeamId",
+                name: "IX_Requests_TechTeamId",
                 table: "Requests",
-                column: "TeamId",
-                unique: true,
-                filter: "[TeamId] IS NOT NULL");
+                column: "TechTeamId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestStatusHistories_RequestId",
+                table: "RequestStatusHistories",
+                column: "RequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TechnicalTeamWorker_WorkerId",
@@ -354,13 +381,22 @@ namespace FinalApp.DAL.Migrations
                 name: "EcoBoxes");
 
             migrationBuilder.DropTable(
-                name: "Requests");
+                name: "RequestStatusHistories");
 
             migrationBuilder.DropTable(
                 name: "TechnicalTeamWorker");
 
             migrationBuilder.DropTable(
                 name: "EcoBoxTemplates");
+
+            migrationBuilder.DropTable(
+                name: "Requests");
+
+            migrationBuilder.DropTable(
+                name: "Workers");
+
+            migrationBuilder.DropTable(
+                name: "SuppliersCompanies");
 
             migrationBuilder.DropTable(
                 name: "Clients");
@@ -379,12 +415,6 @@ namespace FinalApp.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "TechnicalTeams");
-
-            migrationBuilder.DropTable(
-                name: "Workers");
-
-            migrationBuilder.DropTable(
-                name: "SuppliersCompanies");
         }
     }
 }
