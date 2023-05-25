@@ -12,6 +12,5 @@ namespace FinalApp.Services.Interfaces
         public Task<IBaseResponse<bool>> AcceptRequest(int requestId, int Id);
         public Task<IBaseResponse<bool>> MarkRequestAsCompleted(int requestId);
         public Task<IBaseResponse<bool>> CloseRequestByUser(int requestId, int Id);
-
     }
 }

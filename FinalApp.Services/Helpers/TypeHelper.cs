@@ -12,7 +12,7 @@ namespace FinalApp.Services.Helpers
     {
         public static async Task<IEnumerable<Request>> CheckUserTypeForActiveRequest(int Id, IBaseAsyncRepository<Request> _repository)
         {
-            if (typeof(T) == typeof(TechnicalTeam))
+            if (typeof(T) == typeof(TechTeam))
             {
                 return await _repository
                     .ReadAllAsync().Result
@@ -31,7 +31,7 @@ namespace FinalApp.Services.Helpers
 
         public static async Task<IEnumerable<Request>> CheckUserTypeForClosedRequest(int Id, IBaseAsyncRepository<Request> repository)
         {
-            if (typeof(T) == typeof(TechnicalTeam))
+            if (typeof(T) == typeof(TechTeam))
             {
                 return await repository
                     .ReadAllAsync().Result
@@ -51,7 +51,7 @@ namespace FinalApp.Services.Helpers
         public static async Task<Request> CheckUserTypeForAcceptRequest(int requestId, int Id, IBaseAsyncRepository<Request> repository)
         {
             var request = await repository.ReadByIdAsync(requestId);
-            if (typeof(T) == typeof(TechnicalTeam))
+            if (typeof(T) == typeof(TechTeam))
             {
                 request.RequestStatus = Status.InProgress;
                 request.TechTeamId = Id;

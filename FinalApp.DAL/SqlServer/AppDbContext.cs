@@ -10,7 +10,7 @@ namespace FinalApp.DAL.SqlServer
     {
         public DbSet<Client> Clients { get; set; }
         public DbSet<SupportOperator> SupportOperators { get; set; }
-        public DbSet<TechnicalTeam> TechnicalTeams { get; set; }
+        public DbSet<TechTeam> TechnicalTeams { get; set; }
         public DbSet<Worker> Workers { get; set; }
         public DbSet<EcoBox> EcoBoxes { get; set; }
         public DbSet<EcoBoxTemplate> EcoBoxTemplates { get; set; }
@@ -48,7 +48,7 @@ namespace FinalApp.DAL.SqlServer
                  .WithOne(request => request.Review)
                  .HasForeignKey<Request>(request => request.ReviewId);
 
-            modelBuilder.Entity<TechnicalTeam>()
+            modelBuilder.Entity<TechTeam>()
                 .HasOne(team => team.Request)
                 .WithOne(request => request.TechnicalTeam)
                 .HasForeignKey<Request>(request => request.TechTeamId);

@@ -17,7 +17,7 @@ namespace FinalApp.Api
             #region Base_Repositories 
             services.AddScoped<IBaseAsyncRepository<Client>, BaseAsyncRepository<Client>>();
             services.AddScoped<IBaseAsyncRepository<Request>, BaseAsyncRepository<Request>>();
-            services.AddScoped<IBaseAsyncRepository<TechnicalTeam>, BaseAsyncRepository<TechnicalTeam>>();
+            services.AddScoped<IBaseAsyncRepository<TechTeam>, BaseAsyncRepository<TechTeam>>();
             services.AddScoped<IBaseAsyncRepository<SupportOperator>, BaseAsyncRepository<SupportOperator>>();
             services.AddScoped<IBaseAsyncRepository<Review>, BaseAsyncRepository<Review>>();
             services.AddScoped<IBaseAsyncRepository<Location>, BaseAsyncRepository<Location>>();
@@ -31,14 +31,14 @@ namespace FinalApp.Api
             #region Base_Services
             services.AddScoped<IBaseService<Client, ClientDTO>, BaseService<Client, ClientDTO>>();
             services.AddScoped<IBaseService<Request, RequestDTO>, BaseService<Request, RequestDTO>>();
-            services.AddScoped<IBaseService<TechnicalTeam, TechnicalTeamDTO>, BaseService<TechnicalTeam, TechnicalTeamDTO>>();
+            services.AddScoped<IBaseService<TechTeam, TechTeamDTO>, BaseService<TechTeam, TechTeamDTO>>();
             services.AddScoped<IBaseService<SupportOperator, SupportOperatorDTO>, BaseService<SupportOperator, SupportOperatorDTO>>();
             services.AddScoped<IBaseService<Review, ReviewDTO>, BaseService<Review, ReviewDTO>>();
             #endregion
 
             #region User_Services
             services.AddScoped<IClientService, ClientService>();
-            services.AddScoped<IUserService<TechnicalTeam>, UserService<TechnicalTeam>>();
+            services.AddScoped<IUserService<TechTeam>, UserService<TechTeam>>();
             services.AddScoped<IUserService<SupportOperator>, UserService<SupportOperator>>();
             #endregion
 
