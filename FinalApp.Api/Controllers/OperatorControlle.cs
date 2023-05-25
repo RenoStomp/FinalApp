@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinalApp.Api.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class TechTeamController : ControllerBase
+    [ApiController]
+    public class OperatorController : ControllerBase
     {
-        private readonly IBaseService<TechTeam, TechTeamDTO> _service;
-        private readonly IUserService<TechTeam> _userService;
+        private readonly IBaseService<SupportOperator, SupportOperatorDTO> _service;
+        private readonly IUserService<SupportOperator> _userService;
 
-        public TechTeamController(IBaseService<TechTeam, TechTeamDTO> service, IUserService<TechTeam> userService)
+        public OperatorController(IBaseService<SupportOperator, SupportOperatorDTO> service, IUserService<SupportOperator> userService)
         {
             _service = service;
             _userService = userService;
@@ -67,14 +67,14 @@ namespace FinalApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(TechTeamDTO model)
+        public async Task<IActionResult> Post(SupportOperatorDTO model)
         {
             await _service.CreateAsync(model);
             return Ok();
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(TechTeamDTO model)
+        public async Task<IActionResult> Put(SupportOperatorDTO model)
         {
             await _service.UpdateAsync(model);
             return Ok();
