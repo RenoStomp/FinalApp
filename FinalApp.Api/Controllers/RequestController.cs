@@ -75,7 +75,7 @@ namespace FinalApp.Api.Controllers
             return Ok(response.Data);
         }
 
-        [HttpPost("AssignRequestToTeam/{requestId}/{teamId}")]
+        [HttpPost("AssignRequestToTechTeam/{requestId}/{teamId}")]
         public async Task<IActionResult> AssignRequestToTeam(int requestId, int teamId)
         {
             var response = await _requestService.AssignRequestToTeam(requestId, teamId);

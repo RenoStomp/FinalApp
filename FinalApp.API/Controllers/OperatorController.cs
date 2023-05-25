@@ -45,7 +45,7 @@ namespace FinalApp.Api.Controllers
             return Ok(response.Data);
         }
 
-        [HttpPost("CloseRequestByUser/{requestId}/{Id}")]
+        [HttpPost("CloseRequestByOperator/{requestId}/{Id}")]
         public async Task<IActionResult> CloseRequestByUser(int requestId, int Id)
         {
             var response = await _userService.CloseRequestByUser(requestId, Id);
