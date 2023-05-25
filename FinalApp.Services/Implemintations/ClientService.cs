@@ -66,7 +66,7 @@ namespace FinalApp.Services.Implemintations
                 return ResponseFactory<bool>.CreateErrorResponse(exception);
             }
         }
-        public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetActiveRequests(int clientId)
+        public async Task<IBaseResponse<IEnumerable<Request>>> GetActiveRequests(int clientId)
         {
             try
             {
@@ -77,21 +77,19 @@ namespace FinalApp.Services.Implemintations
 
                 var activeRequests = client.Requests.Where(r => r.RequestStatus == Status.Active);
 
-                IEnumerable<RequestDTO> activeRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(activeRequests);
-
-                return ResponseFactory<IEnumerable<RequestDTO>>.CreateSuccessResponse(activeRequestsDTO);
+                return ResponseFactory<IEnumerable<Request>>.CreateSuccessResponse(activeRequests);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<IEnumerable<RequestDTO>>.CreateNotFoundResponse(argException);
+                return ResponseFactory<IEnumerable<Request>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<IEnumerable<RequestDTO>>.CreateErrorResponse(exception);
+                return ResponseFactory<IEnumerable<Request>>.CreateErrorResponse(exception);
             }
         }
 
-        public async Task<IBaseResponse<IEnumerable<RequestDTO>>> GetClosedRequests(int clientId)
+        public async Task<IBaseResponse<IEnumerable<Request>>> GetClosedRequests(int clientId)
         {
             try
             {
@@ -102,17 +100,15 @@ namespace FinalApp.Services.Implemintations
 
                 var closedRequests = client.Requests.Where(r => r.RequestStatus == Status.Closed);
 
-                IEnumerable<RequestDTO> closedRequestsDTO = MapperHelperForDto<Request, RequestDTO>.Map(closedRequests);
-
-                return ResponseFactory<IEnumerable<RequestDTO>>.CreateSuccessResponse(closedRequestsDTO);
+                return ResponseFactory<IEnumerable<Request>>.CreateSuccessResponse(closedRequests);
             }
             catch (ArgumentException argException)
             {
-                return ResponseFactory<IEnumerable<RequestDTO>>.CreateNotFoundResponse(argException);
+                return ResponseFactory<IEnumerable<Request>>.CreateNotFoundResponse(argException);
             }
             catch (Exception exception)
             {
-                return ResponseFactory<IEnumerable<RequestDTO>>.CreateErrorResponse(exception);
+                return ResponseFactory<IEnumerable<Request>>.CreateErrorResponse(exception);
             }
         }
 

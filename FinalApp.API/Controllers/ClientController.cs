@@ -19,24 +19,45 @@ namespace FinalApp.Api.Controllers
             _clientService = clientService;
         }
 
+        [HttpGet("ClientsWithRequest")]
+        public async Task<IResult> GetClients()
+        {
+            var response = await _clientService.GetClientsWithRequests();
+            return Results.Ok(response.Data);
+        }
+        [HttpGet("ActiveRequest")]
+        public async Task<IResult> GetActive( int clientId)
+        {
+            var response = await _clientService.GetActiveRequests(clientId);
+            return Results.Ok(response.Data);
+        }
+        [HttpGet("ClosedRequest")]
+        public async Task<IResult> GetClosed(int clientId)
+        {
+            var response = await _clientService.GetClosedRequests(clientId);
+            return Results.Ok(response.Data);
+        }
+
         [HttpGet]
         public IResult Get()
         {
             var response = _service.ReadAll();
             return Results.Ok(response.Data);
         }
-        //[HttpGet("Requests")]
-        //public IResult GetRequests()
-        //{
-
-        //}
-
+  
         [HttpGet("{id}")]
         public IResult Get(int id)
         {
             var response = _service.ReadById(id);
             return Results.Ok(response.Data);
         }
+
+        [HttpPost("{Register}")]
+        public async Task PostClient(ClientDTO model)
+        {
+           await _clientService.RegisterClient(model);
+        }
+
 
         [HttpPost]
         public async Task Post(ClientDTO model)
