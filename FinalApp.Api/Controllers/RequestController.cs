@@ -53,6 +53,7 @@ namespace FinalApp.Api.Controllers
             await _service.DeleteByIdAsync(id);
             return Ok();
         }
+
         [HttpGet("UnassignedRequests")]
         public async Task<IActionResult> GetUnassignedRequests()
         {
