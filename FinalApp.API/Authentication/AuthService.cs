@@ -55,8 +55,6 @@ namespace FinalApp.Api.Authentication
                 );
             var tokenhandler = new JwtSecurityTokenHandler();
             return tokenhandler.WriteToken(jwt);
-
-
         }
 
     }

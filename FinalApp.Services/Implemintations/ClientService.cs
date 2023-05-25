@@ -9,7 +9,6 @@ using FinalApp.Domain.Models.Enums;
 using FinalApp.Services.Interfaces;
 using FinalApp.Services.Mapping;
 using FinallApp.ValidationHelper;
-using Humanizer;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalApp.Services.Implemintations
