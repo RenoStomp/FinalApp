@@ -1,6 +1,7 @@
 ﻿using FinalApp.Domain.Models.Abstractions.BaseUsers;
 using FinalApp.Services.Implemintations;
 using FinalApp.Services.Interfaces;
+using FinallApp.ValidationHelper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -21,41 +22,51 @@ namespace FinalApp.Api.Authentication
         }
         public async Task<string> AccessToken(string email, string password)
         {
-            var user = await _authManager.FindByEmailAsync(email);
-            if (user == null)
+            try
             {
-                throw new Exception("User is not found");
-            }
-            var result = await _authManager.CheckPasswordAsync(user, password);
-            if (result == false)
-            {
-                throw new Exception("Password is not correct");
-            }
+                var user = await _authManager.FindByLoginAsync(email);
 
-            var roles = await _authManager.GetRolesAsync(user);
-            var claims = new List<Claim>()
-            {
+                ObjectValidator<BaseUser>.CheckIsNotNullObject(user);
+
+                var result = await _authManager.CheckPasswordAsync(user, password);
+                if (result == false) throw new ArgumentNullException("Password is not correct");
+
+
+                var role = user.UserType;
+                var claims = new List<Claim>()
+                {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, email),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
-            };
-            foreach (var role in roles)
+                };
+                claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+                
+                var datenow = DateTime.UtcNow;
+                var expire = DateTime.UtcNow.Add(TimeSpan.FromMinutes(120));
+                var jwt = new JwtSecurityToken(
+                    _jwtSettings.Issuer,
+                    _jwtSettings.Audience,
+                    claims,
+                    datenow,
+                    expire,
+                    new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)),
+                    SecurityAlgorithms.HmacSha256)
+                    );
+
+                var tokenhandler = new JwtSecurityTokenHandler();
+                return tokenhandler.WriteToken(jwt);
+            }
+            catch(ArgumentNullException argNullException)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role));
+                throw new ArgumentNullException("User not found\n\r" +
+                    $"Error: {argNullException}");
+            }
+            catch(Exception exception)
+            {
+                throw new Exception(" internal server error.\n\r" +
+                    $"Error: {exception}");
             }
 
-            var datenow = DateTime.UtcNow;
-            var expire = DateTime.UtcNow.Add(TimeSpan.FromMinutes(120));
-            var jwt = new JwtSecurityToken(
-                _jwtSettings.Issuer,
-                _jwtSettings.Audience,
-                claims,
-                datenow,
-                expire,
-                new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)),
-                SecurityAlgorithms.HmacSha256)
-                );
-            var tokenhandler = new JwtSecurityTokenHandler();
-            return tokenhandler.WriteToken(jwt);
+
         }
 
     }
