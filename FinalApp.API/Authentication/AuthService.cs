@@ -1,8 +1,6 @@
 ﻿using FinalApp.Domain.Models.Abstractions.BaseUsers;
-using FinalApp.Services.Implemintations;
 using FinalApp.Services.Interfaces;
 using FinallApp.ValidationHelper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -39,7 +37,7 @@ namespace FinalApp.Api.Authentication
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 };
                 claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
-                
+
                 var datenow = DateTime.UtcNow;
                 var expire = DateTime.UtcNow.Add(TimeSpan.FromMinutes(120));
                 var jwt = new JwtSecurityToken(
@@ -55,12 +53,12 @@ namespace FinalApp.Api.Authentication
                 var tokenhandler = new JwtSecurityTokenHandler();
                 return tokenhandler.WriteToken(jwt);
             }
-            catch(ArgumentNullException argNullException)
+            catch (ArgumentNullException argNullException)
             {
                 throw new ArgumentNullException("User not found\n\r" +
                     $"Error: {argNullException}");
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw new Exception(" internal server error.\n\r" +
                     $"Error: {exception}");

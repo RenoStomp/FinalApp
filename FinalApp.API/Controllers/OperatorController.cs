@@ -66,13 +66,6 @@ namespace FinalApp.Api.Controllers
             return Ok(response.Data);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post(SupportOperatorDTO model)
-        {
-            await _service.CreateAsync(model);
-            return Ok();
-        }
-
         [HttpPut]
         public async Task<IActionResult> Put(SupportOperatorDTO model)
         {
