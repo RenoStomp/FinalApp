@@ -11,9 +11,9 @@ namespace FinalApp.Api.Authentication
 {
     public class AuthService : IAuthService
     {
-        private readonly IAuthManager<BaseUser> _authManager;
+        private readonly IAuthManager<User> _authManager;
         private readonly JwtSettings _jwtSettings;
-        public AuthService(IAuthManager<BaseUser> userManager, IOptions<JwtSettings> jwtsettings)
+        public AuthService(IAuthManager<User> userManager, IOptions<JwtSettings> jwtsettings)
         {
             _authManager = userManager;
             _jwtSettings = jwtsettings.Value;
@@ -24,19 +24,19 @@ namespace FinalApp.Api.Authentication
             {
                 var user = await _authManager.FindByLoginAsync(email);
 
-                ObjectValidator<BaseUser>.CheckIsNotNullObject(user);
+                ObjectValidator<User>.CheckIsNotNullObject(user);
 
                 var result = await _authManager.CheckPasswordAsync(user, password);
                 if (result == false) throw new ArgumentNullException("Password is not correct");
 
 
                 var role = user.UserType;
-                var claims = new List<Claim>()
+                var claims = new List<Claim>
                 {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, email),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, role.ToString())
                 };
-                claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
 
                 var datenow = DateTime.UtcNow;
                 var expire = DateTime.UtcNow.Add(TimeSpan.FromMinutes(120));

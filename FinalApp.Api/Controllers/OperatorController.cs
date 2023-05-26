@@ -1,6 +1,7 @@
 ﻿using FinalApp.ApiModels.DTOs.EntitiesDTOs.UsersDTOs;
 using FinalApp.Domain.Models.Entities.Persons.Users;
 using FinalApp.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalApp.Api.Controllers
