@@ -1,12 +1,15 @@
-﻿using FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO;
+﻿using FinalApp.Api.Authentication;
+using FinalApp.ApiModels.DTOs.EntitiesDTOs.RequestsDTO;
 using FinalApp.ApiModels.DTOs.EntitiesDTOs.UsersDTOs;
 using FinalApp.DAL.Repository.Implemintations;
 using FinalApp.DAL.Repository.Interfaces;
+using FinalApp.Domain.Models.Abstractions.BaseUsers;
 using FinalApp.Domain.Models.Entities.Persons.Users;
 using FinalApp.Domain.Models.Entities.Requests.EcoBoxInfo;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using FinalApp.Services.Implemintations;
 using FinalApp.Services.Interfaces;
+using FinalApp.Services.Mapping;
 
 namespace FinalApp.Api
 {
@@ -15,17 +18,10 @@ namespace FinalApp.Api
         public static void InitializeRepositories(this IServiceCollection services)
         {
             #region Base_Repositories 
-            services.AddScoped<IBaseAsyncRepository<Client>, BaseAsyncRepository<Client>>();
-            services.AddScoped<IBaseAsyncRepository<Request>, BaseAsyncRepository<Request>>();
-            services.AddScoped<IBaseAsyncRepository<TechTeam>, BaseAsyncRepository<TechTeam>>();
-            services.AddScoped<IBaseAsyncRepository<SupportOperator>, BaseAsyncRepository<SupportOperator>>();
-            services.AddScoped<IBaseAsyncRepository<Review>, BaseAsyncRepository<Review>>();
-            services.AddScoped<IBaseAsyncRepository<Location>, BaseAsyncRepository<Location>>();
-            services.AddScoped<IBaseAsyncRepository<EcoBoxTemplate>, BaseAsyncRepository<EcoBoxTemplate>>();
-
-
+            services.AddScoped(typeof(IBaseAsyncRepository<>), typeof(BaseAsyncRepository<>));
             #endregion
         }
+
         public static void InitializeServices(this IServiceCollection services)
         {
             #region Base_Services
@@ -46,6 +42,19 @@ namespace FinalApp.Api
             services.AddScoped<IRequestService, RequestService>();
             services.AddScoped<IRequestHistoryService, RequestHistoryService>();
             services.AddScoped<IReviewService, ReviewService>();
+            #endregion
+
+            #region Authorization_And_Authentication_Services
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped(typeof(IAuthManager<>), typeof(AuthManager<>));
+
+            #endregion
+
+            #region AutoMapper
+            services.AddAutoMapper(config =>
+            {
+                config.AddProfile(new MappingProfile());
+            });
             #endregion
         }
 

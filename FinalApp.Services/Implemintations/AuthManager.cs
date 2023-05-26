@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinalApp.Services.Implemintations
 {
-    public class AuthManeger<T> : IAuthManager<T>
+    public class AuthManager<T> : IAuthManager<T>
         where T : BaseUser
     {
         private readonly IBaseAsyncRepository<T> _repository;
 
-        public AuthManeger(IBaseAsyncRepository<T> repository)
+        public AuthManager(IBaseAsyncRepository<T> repository)
         {
             _repository = repository;
         }
