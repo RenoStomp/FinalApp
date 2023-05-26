@@ -1,4 +1,5 @@
 ﻿using FinalApp.Domain.Models.Abstractions.BaseUsers;
+using FinalApp.Services.Implemintations;
 using FinalApp.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -11,27 +12,27 @@ namespace FinalApp.Api.Authentication
 {
     public class AuthService : IAuthService
     {
-        private readonly UserManager<BaseUser> _userManager;
+        private readonly IAuthManager<BaseUser> _authManager;
         private readonly JwtSettings _jwtSettings;
-        public AuthService(UserManager<BaseUser> userManager, IOptions<JwtSettings> jwtsettings)
+        public AuthService(IAuthManager<BaseUser> userManager, IOptions<JwtSettings> jwtsettings)
         {
-            _userManager = userManager;
+            _authManager = userManager;
             _jwtSettings = jwtsettings.Value;
         }
         public async Task<string> AccessToken(string email, string password)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _authManager.FindByEmailAsync(email);
             if (user == null)
             {
                 throw new Exception("User is not found");
             }
-            var result = await _userManager.CheckPasswordAsync(user, password);
+            var result = await _authManager.CheckPasswordAsync(user, password);
             if (result == false)
             {
                 throw new Exception("Password is not correct");
             }
 
-            var roles = await _userManager.GetRolesAsync(user);
+            var roles = await _authManager.GetRolesAsync(user);
             var claims = new List<Claim>()
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, email),

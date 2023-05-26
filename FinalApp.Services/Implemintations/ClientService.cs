@@ -6,6 +6,7 @@ using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.Domain.Models.Entities.Persons.Users;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using FinalApp.Domain.Models.Enums;
+using FinalApp.Services.Helpers;
 using FinalApp.Services.Interfaces;
 using FinalApp.Services.Mapping;
 using FinallApp.ValidationHelper;
@@ -50,6 +51,7 @@ namespace FinalApp.Services.Implemintations
                 ObjectValidator<ClientDTO>.CheckIsNotNullObject(client);
 
                 var newClient = MapperHelperForEntity<ClientDTO, Client>.Map(client);
+                newClient.Password = HashHelper.HashPassword(client.Password);
 
                 await _repository.Create(newClient);
 
