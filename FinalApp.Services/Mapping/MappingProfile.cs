@@ -10,7 +10,7 @@ namespace FinalApp.Services.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<BaseUser, BaseUserDTO>();
+            CreateMap<User, BaseUserDTO>();
             CreateMap<Client, ClientDTO>();
             CreateMap<TechTeam, TechTeamDTO>();
             CreateMap<SupportOperator, SupportOperatorDTO>();

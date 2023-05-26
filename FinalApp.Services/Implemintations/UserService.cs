@@ -13,7 +13,7 @@ using FinallApp.ValidationHelper;
 namespace FinalApp.Services.Implemintations
 {
     public class UserService<T> : IUserService<T>
-        where T : BaseUser
+        where T : User
     {
         private readonly IBaseAsyncRepository<Request> _repository;
 

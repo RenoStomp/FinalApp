@@ -5,7 +5,7 @@ using FinalApp.Domain.Models.Enums;
 
 namespace FinalApp.Domain.Models.Entities.Persons.Users
 {
-    public class TechTeam : BaseUser
+    public class TechTeam : User
     {
         public override Roles UserType { get; set; } = Roles.TechnicalSpecialist;
 
