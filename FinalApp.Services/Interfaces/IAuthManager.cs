@@ -1,4 +1,5 @@
 ﻿using FinalApp.Domain.Models.Abstractions.BaseUsers;
+using FinalApp.Domain.Models.Enums;
 
 namespace FinalApp.Services.Interfaces
 {
@@ -7,6 +8,5 @@ namespace FinalApp.Services.Interfaces
     {
         public Task<T> FindByLoginAsync(string login);
         public Task<bool> CheckPasswordAsync(T user, string password);
-        public Task<IEnumerable<string>> GetRolesAsync(T user);
     }
 }
