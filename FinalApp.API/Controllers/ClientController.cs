@@ -60,12 +60,6 @@ namespace FinalApp.Api.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post(ClientDTO model)
-        {
-            await _service.CreateAsync(model);
-            return Ok();
-        }
 
         [HttpPut]
         public async Task<IActionResult> Put(ClientDTO model)
