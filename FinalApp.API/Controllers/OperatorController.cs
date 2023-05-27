@@ -10,9 +10,9 @@ namespace FinalApp.Api.Controllers
     [ApiController]
     public class OperatorController : ControllerBase
     {
-        private readonly IUserService<SupportOperator> _userService;
+        private readonly IBaseUserService<SupportOperator> _userService;
 
-        public OperatorController( IUserService<SupportOperator> userService)
+        public OperatorController( IBaseUserService<SupportOperator> userService)
         {
             _userService = userService;
         }
