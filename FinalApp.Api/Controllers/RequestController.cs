@@ -10,10 +10,10 @@ namespace FinalApp.Api.Controllers
     [ApiController]
     public class RequestController : ControllerBase
     {
-        private readonly IBaseService<Request, RequestDTO> _service;
+        private readonly IBaseRequestService<Request, RequestDTO> _service;
         private readonly IRequestService _requestService;
 
-        public RequestController(IBaseService<Request, RequestDTO> service, IRequestService requestService)
+        public RequestController(IBaseRequestService<Request, RequestDTO> service, IRequestService requestService)
         {
             _service = service;
             _requestService = requestService;

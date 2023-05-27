@@ -10,9 +10,9 @@ namespace FinalApp.Api.Controllers
     [ApiController]
     public class ReviewController : ControllerBase
     {
-        private readonly IBaseService<Review, ReviewDTO> _service;
+        private readonly IBaseRequestService<Review, ReviewDTO> _service;
         private readonly IReviewService _reviewService;
-        public ReviewController(IBaseService<Review, ReviewDTO> service, IReviewService reviewService)
+        public ReviewController(IBaseRequestService<Review, ReviewDTO> service, IReviewService reviewService)
         {
             _service = service;
             _reviewService = reviewService;

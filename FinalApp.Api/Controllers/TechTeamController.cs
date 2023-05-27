@@ -9,9 +9,9 @@ namespace FinalApp.Api.Controllers
     [Route("api/[controller]")]
     public class TechTeamController : ControllerBase
     {
-        private readonly IUserService<TechTeam> _userService;
+        private readonly IBaseUserService<TechTeam> _userService;
 
-        public TechTeamController(IUserService<TechTeam> userService)
+        public TechTeamController(IBaseUserService<TechTeam> userService)
         {
             _userService = userService;
         }

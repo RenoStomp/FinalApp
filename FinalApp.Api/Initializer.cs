@@ -25,17 +25,17 @@ namespace FinalApp.Api
         public static void InitializeServices(this IServiceCollection services)
         {
             #region Base_Services
-            services.AddScoped<IBaseService<Client, ClientDTO>, BaseService<Client, ClientDTO>>();
-            services.AddScoped<IBaseService<Request, RequestDTO>, BaseService<Request, RequestDTO>>();
-            services.AddScoped<IBaseService<TechTeam, TechTeamDTO>, BaseService<TechTeam, TechTeamDTO>>();
-            services.AddScoped<IBaseService<SupportOperator, SupportOperatorDTO>, BaseService<SupportOperator, SupportOperatorDTO>>();
-            services.AddScoped<IBaseService<Review, ReviewDTO>, BaseService<Review, ReviewDTO>>();
+            services.AddScoped<IBaseRequestService<Client, ClientDTO>, BaseRequestService<Client, ClientDTO>>();
+            services.AddScoped<IBaseRequestService<Request, RequestDTO>, BaseRequestService<Request, RequestDTO>>();
+            services.AddScoped<IBaseRequestService<TechTeam, TechTeamDTO>, BaseRequestService<TechTeam, TechTeamDTO>>();
+            services.AddScoped<IBaseRequestService<SupportOperator, SupportOperatorDTO>, BaseRequestService<SupportOperator, SupportOperatorDTO>>();
+            services.AddScoped<IBaseRequestService<Review, ReviewDTO>, BaseRequestService<Review, ReviewDTO>>();
             #endregion
 
             #region User_Services
             services.AddScoped<IClientService, ClientService>();
-            services.AddScoped<IUserService<TechTeam>, UserService<TechTeam>>();
-            services.AddScoped<IUserService<SupportOperator>, UserService<SupportOperator>>();
+            services.AddScoped<IBaseUserService<TechTeam>, BaseUserService<TechTeam>>();
+            services.AddScoped<IBaseUserService<SupportOperator>, BaseUserService<SupportOperator>>();
             #endregion
 
             #region Request_Services

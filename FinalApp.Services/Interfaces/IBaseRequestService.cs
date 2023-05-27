@@ -11,7 +11,7 @@ namespace FinalApp.Services.Interfaces
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
     /// <typeparam name="Tmodel">The DTO type.</typeparam>
-    public interface IBaseService<T, Tmodel>
+    public interface IBaseRequestService<T, Tmodel>
         where T : BaseEntity
         where Tmodel : BaseEntityDTO
     {

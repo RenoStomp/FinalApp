@@ -23,9 +23,8 @@ namespace FinalApp.DAL.SqlServer
         public DbSet<Review> Reviews { get; set; }
         public DbSet<RequestStatusHistory> RequestStatusHistories { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options = null) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
