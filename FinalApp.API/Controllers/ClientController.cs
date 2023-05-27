@@ -9,12 +9,10 @@ namespace FinalApp.Api.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        private readonly IBaseService<Client, ClientDTO> _service;
         private readonly IClientService _clientService;
 
-        public ClientController(IBaseService<Client, ClientDTO> service, IClientService clientService)
+        public ClientController(IClientService clientService)
         {
-            _service = service;
             _clientService = clientService;
         }
 
@@ -39,40 +37,40 @@ namespace FinalApp.Api.Controllers
             return Ok(response.Data);
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var response = _service.ReadAll();
-            return Ok(response.Data);
-        }
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    var response = _service.ReadAll();
+        //    return Ok(response.Data);
+        //}
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            var response = _service.ReadById(id);
-            return Ok(response.Data);
-        }
+        //[HttpGet("{id}")]
+        //public IActionResult Get(int id)
+        //{
+        //    var response = _service.ReadById(id);
+        //    return Ok(response.Data);
+        //}
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> PostClient(ClientDTO model)
-        {
-            await _clientService.RegisterClient(model);
-            return Ok();
-        }
+        //[HttpPost("Register")]
+        //public async Task<IActionResult> PostClient(ClientDTO model)
+        //{
+        //    await _clientService.RegisterClient(model);
+        //    return Ok();
+        //}
 
 
-        [HttpPut]
-        public async Task<IActionResult> Put(ClientDTO model)
-        {
-            await _service.UpdateAsync(model);
-            return Ok();
-        }
+        //[HttpPut]
+        //public async Task<IActionResult> Put(ClientDTO model)
+        //{
+        //    await _service.UpdateAsync(model);
+        //    return Ok();
+        //}
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _service.DeleteByIdAsync(id);
-            return Ok();
-        }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    await _service.DeleteByIdAsync(id);
+        //    return Ok();
+        //}
     }
 }
