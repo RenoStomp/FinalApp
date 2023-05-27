@@ -10,12 +10,10 @@ namespace FinalApp.Api.Controllers
     [ApiController]
     public class OperatorController : ControllerBase
     {
-        private readonly IBaseService<SupportOperator, SupportOperatorDTO> _service;
         private readonly IUserService<SupportOperator> _userService;
 
-        public OperatorController(IBaseService<SupportOperator, SupportOperatorDTO> service, IUserService<SupportOperator> userService)
+        public OperatorController( IUserService<SupportOperator> userService)
         {
-            _service = service;
             _userService = userService;
         }
 
@@ -53,32 +51,32 @@ namespace FinalApp.Api.Controllers
             return Ok(response.Data);
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var response = _service.ReadAll();
-            return Ok(response.Data);
-        }
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    var response = _service.ReadAll();
+        //    return Ok(response.Data);
+        //}
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            var response = _service.ReadById(id);
-            return Ok(response.Data);
-        }
+        //[HttpGet("{id}")]
+        //public IActionResult Get(int id)
+        //{
+        //    var response = _service.ReadById(id);
+        //    return Ok(response.Data);
+        //}
 
-        [HttpPut]
-        public async Task<IActionResult> Put(SupportOperatorDTO model)
-        {
-            await _service.UpdateAsync(model);
-            return Ok();
-        }
+        //[HttpPut]
+        //public async Task<IActionResult> Put(SupportOperatorDTO model)
+        //{
+        //    await _service.UpdateAsync(model);
+        //    return Ok();
+        //}
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _service.DeleteByIdAsync(id);
-            return Ok();
-        }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    await _service.DeleteByIdAsync(id);
+        //    return Ok();
+        //}
     }
 }

@@ -5,7 +5,7 @@ using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.Domain.Models.Abstractions.BaseEntities;
 using FinalApp.Domain.Models.Abstractions.BaseUsers;
 using FinalApp.Services.Interfaces;
-using FinalApp.Services.Mapping;
+using FinalApp.Services.Mapping.Helpers;
 using FinallApp.ValidationHelper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

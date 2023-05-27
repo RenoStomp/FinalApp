@@ -9,7 +9,7 @@ namespace FinalApp.Services.Interfaces
     public interface IClientService
     {
         public Task<IBaseResponse<IEnumerable<Client>>> GetClientsWithRequests();
-        public Task<IBaseResponse<bool>> RegisterClient(ClientDTO client);
+       // public Task<IBaseResponse<bool>> RegisterClient(ClientDTO client);
         public Task<IBaseResponse<IEnumerable<Request>>> GetActiveRequests(int clientId);
         public Task<IBaseResponse<IEnumerable<Request>>> GetClosedRequests(int clientId);
     }

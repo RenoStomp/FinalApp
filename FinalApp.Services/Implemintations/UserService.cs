@@ -7,13 +7,13 @@ using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using FinalApp.Domain.Models.Enums;
 using FinalApp.Services.Helpers;
 using FinalApp.Services.Interfaces;
-using FinalApp.Services.Mapping;
+using FinalApp.Services.Mapping.Helpers;
 using FinallApp.ValidationHelper;
 
 namespace FinalApp.Services.Implemintations
 {
     public class UserService<T> : IUserService<T>
-        where T : User
+        where T : ApplicationUser
     {
         private readonly IBaseAsyncRepository<Request> _repository;
 

@@ -5,7 +5,7 @@ using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using FinalApp.Domain.Models.Enums;
 using FinalApp.Services.Interfaces;
-using FinalApp.Services.Mapping;
+using FinalApp.Services.Mapping.Helpers;
 using FinallApp.ValidationHelper;
 using Microsoft.EntityFrameworkCore;
 

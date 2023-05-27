@@ -9,12 +9,10 @@ namespace FinalApp.Api.Controllers
     [Route("api/[controller]")]
     public class TechTeamController : ControllerBase
     {
-        private readonly IBaseService<TechTeam, TechTeamDTO> _service;
         private readonly IUserService<TechTeam> _userService;
 
-        public TechTeamController(IBaseService<TechTeam, TechTeamDTO> service, IUserService<TechTeam> userService)
+        public TechTeamController(IUserService<TechTeam> userService)
         {
-            _service = service;
             _userService = userService;
         }
 
@@ -50,34 +48,6 @@ namespace FinalApp.Api.Controllers
         {
             var response = await _userService.CloseRequestByUser(requestId, Id);
             return Ok(response.Data);
-        }
-
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var response = _service.ReadAll();
-            return Ok(response.Data);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            var response = _service.ReadById(id);
-            return Ok(response.Data);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Put(TechTeamDTO model)
-        {
-            await _service.UpdateAsync(model);
-            return Ok();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _service.DeleteByIdAsync(id);
-            return Ok();
-        }
+        }       
     }
 }

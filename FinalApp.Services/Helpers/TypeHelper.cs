@@ -1,5 +1,6 @@
 ﻿using FinalApp.DAL.Repository.Interfaces;
 using FinalApp.Domain.Models.Abstractions.BaseEntities;
+using FinalApp.Domain.Models.Abstractions.BaseUsers;
 using FinalApp.Domain.Models.Entities.Persons.Users;
 using FinalApp.Domain.Models.Entities.Requests.RequestsInfo;
 using FinalApp.Domain.Models.Enums;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace FinalApp.Services.Helpers
 {
     public static class TypeHelper<T>
-        where T : BaseEntity
+        where T : ApplicationUser
     {
         public static async Task<IEnumerable<Request>> CheckUserTypeForActiveRequest(int Id, IBaseAsyncRepository<Request> _repository)
         {
